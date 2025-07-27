@@ -16,6 +16,9 @@
     position: absolute;
     left: 0;
     z-index: 5;
+    outline-color: black;
+    outline-width: 0.1rem;
+    outline-style: solid;
 }
 
 .container {
@@ -218,6 +221,9 @@ nav a:hover, nav a:focus {
 .layer_two img {
     height: auto;
     width: 100%;
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .lets_start_button_1 {
@@ -232,6 +238,9 @@ nav a:hover, nav a:focus {
     color: #17252a;
     font-family: 'qwertyuiop';
     z-index: 1;
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .lets_start_description_layer2 {
@@ -337,6 +346,9 @@ nav a:hover, nav a:focus {
     z-index: 3;
     font-family: "qwertyuiop";
     color: white;
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .false_description {
@@ -349,12 +361,14 @@ nav a:hover, nav a:focus {
     left: 100%;
     transform: translateX(-100%);
     box-sizing: border-box;
-    z-index: 0;
+    z-index: 1;
     font-family: "qwertyuiop";
     color: transparent;
     background-color:#17252a;
     line-height: 1.48;
-
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .link_buffer {
@@ -400,6 +414,9 @@ nav a:hover, nav a:focus {
     left: 50%;
     bottom: 0px;
     right: 0px;
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .lets_start2_description_layer2 {
@@ -672,10 +689,16 @@ a:hover {
     position: relative;
 }
 
+.h2,h1 {
+    border-style: solid;
+    border-color: black;
+    border-width: 0.1vw;
+}
+
 .instrument {
     position: absolute;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: white;
     top: 16%;
     left: 50%;
@@ -692,12 +715,11 @@ a:hover {
     background-color: red;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 40%;
-    left: 50%;
-    transform: translateX(-17rem);
-    border-radius: 5rem;
+    left: 34%;
+    border-radius: 5vw;
     overflow: hidden;
 }
 
@@ -712,29 +734,29 @@ a:hover {
     outline: 2px solid white;
 }
 
+
 .instrumentText1 {
     position: absolute;
-    top: calc(40% + 8.5rem); /* 8rem height + 0.5rem gap */
-    font-size: 1.3rem;
+    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
+    font-size: 1.3vw;
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8rem;
-    left: 50%;
-    transform: translateX(-17rem);
+    width: 8vw;
+    left: 34%;
     pointer-events: none; /* So clicking still works on image */
 }
 
 .instrumentText2 {
     position: absolute;
-    top: calc(40% + 8.5rem); /* 8rem height + 0.5rem gap */
-    font-size: 1.3rem;
+    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
+    font-size: 1.3vw;
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8rem;
+    width: 8vw;
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none; /* So clicking still works on image */
@@ -742,43 +764,40 @@ a:hover {
 
 .instrumentText3 {
     position: absolute;
-    top: calc(40% + 8.5rem); /* 8rem height + 0.5rem gap */
-    font-size: 1.3rem;
+    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
+    font-size: 1.3vw;
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8rem;
-    left: 50%;
-    transform: translateX(9rem);
+    width: 8vw;
+    left: 58%;
     pointer-events: none; /* So clicking still works on image */
 }
 
 .instrumentText4 {
     position: absolute;
-    top: calc(60% + 8.5rem); /* 8rem height + 0.5rem gap */
-    font-size: 1.3rem;
+    top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
+    font-size: 1.3vw;
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8rem;
-    left: 50%;
-    transform: translateX(3rem);
+    width: 8vw;
+    left: 53%;
     pointer-events: none; /* So clicking still works on image */
 }
 
 .instrumentText5 {
     position: absolute;
-    top: calc(60% + 8.5rem); /* 8rem height + 0.5rem gap */
-    font-size: 1.3rem;
+    top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
+    font-size: 1.3vw;
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8rem;
-    left: 50%;
-    transform: translateX(-10rem);
+    width: 8vw;
+    left: 39%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -787,12 +806,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 5rem;
+    border-radius: 5vw;
     overflow: hidden;
 }
 
@@ -807,12 +826,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 5rem;
+    border-radius: 5vw;
 }
 
 .instruments3 {
@@ -820,12 +839,11 @@ a:hover {
     background-color: green;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 40%;
-    left: 50%;
-    transform: translateX(9rem);
-    border-radius: 8rem;
+    left: 58%;
+    border-radius: 8vw;
     overflow: hidden;
 }
 
@@ -840,12 +858,11 @@ a:hover {
     background-color: yellow;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 60%;
-    left: 50%;
-    transform: translateX(3rem);
-    border-radius: 8rem;
+    left: 53%;
+    border-radius: 8vw;
     overflow: hidden;
 }
 
@@ -860,12 +877,11 @@ a:hover {
     background-color: purple;
     color: white;
     position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 8vw;
+    height: 8vw;
     top: 60%;
-    left: 50%;
-    transform: translateX(-10rem);
-    border-radius: 8rem;
+    left: 39%;
+    border-radius: 8vw;
     overflow: hidden;
 }
 
@@ -882,10 +898,10 @@ a:hover {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 2rem; /* spacing between back and next */
+    gap: 2vw; /* spacing between back and next */
     justify-content: center;
     align-items: center;
-    bottom: 1rem;
+    bottom: 1vw;
 }
 
 /* .back, .next {
@@ -907,11 +923,11 @@ a:hover {
   all: unset;           /* Reset all default button styles */
   display: inline-block; /* So it behaves like a div/span */
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   color: white;
   border: 2px solid white;
-  border-radius: 1rem;
-  padding: 0.25rem 1rem;
+  border-radius: 1vw;
+  padding: 0.25vw 1vw;
   text-align: center;
   transition: 0.3s;
   user-select: none;    /* Optional: prevent text selection on click */
@@ -934,106 +950,98 @@ a:hover {
 .legend {
     position: absolute;
     font-family: "qwertyuiop";
-    font-size: 1rem;
-    bottom: 0.5rem;
+    font-size: 1vw;
+    bottom: 0.5vw;
     left: 50%;
     transform: translateX(-50%);
-    height: 2rem;
+    height: 2vw;
     color: white;
 }
 
 .steps_1 {
     position: absolute;
-    width: 8rem;
-    left: -5rem;
+    width: 8vw;
+    left: -5vw;
 }
 
 .step1_1 {
     position: absolute;
-    left: 1.25rem;
-    top: 0.2rem;
-    width: 1rem;
-    height: 1rem;
+    left: 1.25vw;
+    top: 0.2vw;
+    width: 1vw;
+    height: 1vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .step1_2 {
     position: absolute;
-    left: 1.5rem;
-    top: 0.45rem;
-    width: 0.5rem;
-    height: 0.5rem;
+    left: 1.5vw;
+    top: 0.45vw;
+    width: 0.5vw;
+    height: 0.5vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .step2_1 {
     position: absolute;
-    left: 3rem;
-    top: 0.45rem;
-    width: 0.5rem;
-    height: 0.5rem;
+    left: 3vw;
+    top: 0.45vw;
+    width: 0.5vw;
+    height: 0.5vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .step2_2 {
     position: absolute;
-    left: 2.75rem;
-    top: 0.2rem;
-    width: 1rem;
-    height: 1rem;
+    left: 2.75vw;
+    top: 0.2vw;
+    width: 1vw;
+    height: 1vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .step3_1 {
     position: absolute;
-    left: 4.5rem;
-    top: 0.45rem;
-    width: 0.5rem;
-    height: 0.5rem;
+    left: 4.5vw;
+    top: 0.45vw;
+    width: 0.5vw;
+    height: 0.5vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .step3_2 {
     position: absolute;
-    left: 4.25rem;
-    top: 0.2rem;
-    width: 1rem;
-    height: 1rem;
+    left: 4.25vw;
+    top: 0.2vw;
+    width: 1vw;
+    height: 1vw;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.5vw;
 }
 
 .beginner {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 15rem;
-    height: 4.1rem;
+    width: 15vw;
+    height: 4.1vw;
     top: 10%;
     left: 50%;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
     transform: translateX(-50%);
-    border-radius: 1rem;
+    border-radius: 1vw;
 }
 
 .beginner:hover {
     background-color: grey;
     color: white;
     position: relative;
-    width: 15rem;
-    height: 4.1rem;
-    top: 10%;
-    left: 50%;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    transform: translateX(-50%);
-    border-radius: 3rem;
 }
 
 ::placeholder {
@@ -1044,16 +1052,16 @@ input[type=text], input[type=tel] {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 15rem;
-    height: 4.1rem;
+    width: 15vw;
+    height: 4.1vw;
     top: 10%;
     left: auto;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: white;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1064,38 +1072,38 @@ input[type=text]:hover, input[type=tel]:hover {
     background-color: grey;
     color: white;
     position: relative;
-    width: 15rem;
-    height: 4.1rem;
+    width: 15vw;
+    height: 4.1vw;
     top: 10%;
     left: auto;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
     outline: solid;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
 
     font-family: 'qwertyuiop', sans-serif;
     border: 2px solid transparent;  
-    border-radius: 1rem;
+    border-radius: 1vw;
 }
 
 input[type=text]:focus-within {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 30rem;
-    height: 4.1rem;
+    width: 30vw;
+    height: 4.1vw;
     top: 10%;
     left: auto;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
     outline: solid;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: white;
 
     font-family: 'qwertyuiop', sans-serif; 
@@ -1106,16 +1114,16 @@ input[type=tel]:focus-within {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 20rem;
-    height: 4.1rem;
+    width: 20vw;
+    height: 4.1vw;
     top: 10%;
     left: auto;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
     outline: solid;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: white;
 
     font-family: 'qwertyuiop', sans-serif; 
@@ -1125,8 +1133,8 @@ input[type=tel]:focus-within {
 .form-group {
     position: relative;
     width: 100%;
-    max-width: 216px;
-    height: 4.1rem;
+    max-width: 15vw;
+    height: 4.1vw;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -1139,12 +1147,12 @@ input[type=date] {
     height: 100%;
     top: 0;
     left: 0;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: transparent;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1178,26 +1186,26 @@ label {
     height: 100%;
     top: 0;
     left: 0;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
     font-family: 'qwertyuiop', sans-serif;
     border: 2px solid transparent; 
     text-align: center;
 
     color: rgb(170, 170, 170);
-    font-size: 2rem;
+    font-size: 2vw;
     pointer-events: none;
     background-color: rgb(99, 99, 99);
     z-index: 0;
 }
 
 input[type="date"]:valid + label {
-    height: 1rem;
-    width: 5rem;
-    top: 0rem;
-    left: 0.5rem;
-    font-size: 0.75rem;
+    height: 1vw;
+    width: 5vw;
+    top: 0vw;
+    left: 0.5vw;
+    font-size: 0.75vw;
     color: white;
     background-color: rgb(99, 99, 99);
     z-index: 3;
@@ -1209,15 +1217,15 @@ input[type="date"]:valid {
     background-color: rgb(99, 99, 99);
     position: absolute;
     width: 216px;
-    height: 4.1rem;
+    height: 4.1vw;
     top: 0;
     left: 0;
-    padding-top: 0.9rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
+    padding-top: 0.9vw;
+    margin-bottom: 2vw;
+    border-radius: 1vw;
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: white;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1230,7 +1238,7 @@ input[type="date"]:valid {
 .booking-container {
     font-family: sans-serif;
     background: white;
-    border-radius: 1rem;
+    border-radius: 1vw;
     width: max-content;
     max-width: 75%;
     text-align: center;
@@ -1241,27 +1249,27 @@ input[type="date"]:valid {
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
-    height: 500px;
-    top: -2rem;
+    height: 25vw;
+    top: -2vw;
 }
 
 /* Custom Booking Date Wrapper */
 .booking-date-wrapper {
   position: relative;
   left: 50%;
-  margin-top: 1rem;
+  margin-top: 1vw;
   transform: translateX(-50%);
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
   text-decoration: underline;
-  width: 216px;
-  height: 5rem;
-  border-radius: 1rem;
+  width: 18vw;
+  height: 5vw;
+  border-radius: 1vw;
   background-color: rgb(99, 99, 99);
   font-family: 'qwertyuiop', sans-serif;
-  font-size: 2rem;
+  font-size: 2vw;
   text-align: center;
-  line-height: 4.1rem;
+  line-height: 4.1vw;
   color: rgb(170, 170, 170);
 }
 
@@ -1273,15 +1281,15 @@ input[type="date"]:valid {
 .booking-date {
   background-color: transparent !important;
   position: relative;
-  top: 1rem;
+  top: 1vw;
   left: 50% !important;
   transform: translateX(-50%) !important;
   width: 100%;
   height: 100%;
-  font-size: 2rem !important;
+  font-size: 2vw !important;
   color: transparent !important;
   border: none !important;
-  border-radius: 1rem !important;
+  border-radius: 1vw !important;
   text-align: center !important;
   cursor: pointer !important;
   z-index: 2 !important;
@@ -1310,16 +1318,16 @@ input[type="date"]:valid {
 
 /* Time Slots */
 .booking-timeslots {
-  margin-top: 2rem;
+  margin-top: 2vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1vw;
 }
 
 .booking-slot {
     position: relative;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75vw 1.25vw;
   border: 1px solid #333;
   border-radius: 10px;
   cursor: pointer;
@@ -1342,7 +1350,7 @@ input[type="date"]:valid {
 
 /* Confirmation Message */
 .booking-confirmation {
-  margin-top: 2rem;
+  margin-top: 2vw;
   font-weight: bold;
   color: green;
 }
@@ -1350,7 +1358,7 @@ input[type="date"]:valid {
 .details {
     position: absolute;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8vw;
     color: white;
     top: 16%;
     left: 50%;
@@ -1368,15 +1376,15 @@ input[type="date"]:valid {
     height: min-content;
     top: 10%;
     left: 50%;
-    padding-top: 0.3rem;
-    margin-bottom: 0.75rem;
+    padding-top: 0.3vw;
+    margin-bottom: 0.75vw;
     transform: translateX(-50%);
-    border-radius: 1rem;
-    font-size: 1rem;
+    border-radius: 1vw;
+    font-size: 0.9vw;
     inline-size: min-content;
     text-wrap: nowrap;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 
 .detailBlocks p {
@@ -1389,7 +1397,7 @@ input[type="date"]:valid {
 }
 
 .two {
-    margin-left: 5rem;
+    margin-left: 5vw;
 }
 
 .one {
