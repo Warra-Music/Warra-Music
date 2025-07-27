@@ -689,12 +689,6 @@ a:hover {
     position: relative;
 }
 
-.h2,h1 {
-    border-style: solid;
-    border-color: black;
-    border-width: 0.1vw;
-}
-
 .instrument {
     position: absolute;
     text-align: center;
