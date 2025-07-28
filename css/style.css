@@ -917,11 +917,11 @@ a:hover {
   all: unset;           /* Reset all default button styles */
   display: inline-block; /* So it behaves like a div/span */
   cursor: pointer;
-  font-size: 1.5vw;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   color: white;
   border: 2px solid white;
-  border-radius: 1vw;
-  padding: 0.25vw 1vw;
+  border-radius: clamp(0.7rem, 1vw, 1rem);
+  padding: clamp(0.2rem, 0.25vw, 0.25rem) clamp(0.5rem, 1vw, 1rem);
   text-align: center;
   transition: 0.3s;
   user-select: none;    /* Optional: prevent text selection on click */
