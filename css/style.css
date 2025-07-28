@@ -692,7 +692,7 @@ a:hover {
 .instrument {
     position: absolute;
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1rem, 2vw, 2rem);
     color: white;
     top: 16%;
     left: 50%;
@@ -709,11 +709,11 @@ a:hover {
     background-color: red;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 40%;
     left: 34%;
-    border-radius: 5vw;
+    border-radius: clamp(4rem, 5vw, 5rem);
     overflow: hidden;
 }
 
@@ -732,12 +732,12 @@ a:hover {
 .instrumentText1 {
     position: absolute;
     top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: 1.3vw;
+    font-size: clamp(0.8rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
     left: 34%;
     pointer-events: none; /* So clicking still works on image */
 }
@@ -745,12 +745,12 @@ a:hover {
 .instrumentText2 {
     position: absolute;
     top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: 1.3vw;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none; /* So clicking still works on image */
@@ -759,12 +759,12 @@ a:hover {
 .instrumentText3 {
     position: absolute;
     top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: 1.3vw;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
     left: 58%;
     pointer-events: none; /* So clicking still works on image */
 }
@@ -772,12 +772,12 @@ a:hover {
 .instrumentText4 {
     position: absolute;
     top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: 1.3vw;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
     left: 53%;
     pointer-events: none; /* So clicking still works on image */
 }
@@ -785,12 +785,12 @@ a:hover {
 .instrumentText5 {
     position: absolute;
     top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: 1.3vw;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
-    width: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
     left: 39%;
     pointer-events: none; /* So clicking still works on image */
 }
@@ -800,12 +800,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 5vw;
+    border-radius: clamp(3rem, 5vw, 5rem);
     overflow: hidden;
 }
 
@@ -820,12 +820,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 5vw;
+    border-radius: clamp(3rem, 5vw, 5rem);
 }
 
 .instruments3 {
@@ -833,11 +833,11 @@ a:hover {
     background-color: green;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 40%;
     left: 58%;
-    border-radius: 8vw;
+    border-radius: clamp(7rem, 8vw, 8rem);
     overflow: hidden;
 }
 
@@ -852,11 +852,11 @@ a:hover {
     background-color: yellow;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 60%;
     left: 53%;
-    border-radius: 8vw;
+    border-radius: clamp(7rem, 8vw, 8rem);
     overflow: hidden;
 }
 
@@ -871,11 +871,11 @@ a:hover {
     background-color: purple;
     color: white;
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(7rem, 8vw, 8rem);
+    height: clamp(7rem, 8vw, 8rem);
     top: 60%;
     left: 39%;
-    border-radius: 8vw;
+    border-radius: clamp(7rem, 8vw, 8rem);
     overflow: hidden;
 }
 
