@@ -712,8 +712,8 @@ a:hover {
     width: clamp(5rem, 8vw, 8rem);
     height: clamp(5rem, 8vw, 8rem);
     top: 40%;
-    left: 41%;
-    transform: translateX(-50%) translateX(-3rem);
+    left: 43%;
+    transform: translateX(-50%) translateX(-5rem);
     border-radius: clamp(5rem, 4vw, 4rem);
     overflow: hidden;
 }
@@ -739,8 +739,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(-3rem);
-    left: 41%;
+    transform: translateX(-50%) translateX(-5rem);
+    left: 43%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -767,8 +767,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(3rem);
-    left: 59%;
+    transform: translateX(-50%) translateX(5rem);
+    left: 57%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -841,9 +841,9 @@ a:hover {
     width: clamp(5rem, 8vw, 8rem);
     height: clamp(5rem, 8vw, 8rem);
     top: 40%;
-    left: 59%;
+    left: 57%;
     border-radius: clamp(5rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(3rem);
+    transform: translateX(-50%) translateX(5rem);
     overflow: hidden;
 }
 
