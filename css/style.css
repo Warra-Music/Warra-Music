@@ -732,8 +732,8 @@ a:hover {
 
 .instrumentText1 {
     position: absolute;
-    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
-    font-size: clamp(0.8rem, 1.3vw, 1.3rem);
+    top: clamp(calc(40% + 5rem), calc(40% + 8.5vw), calc(40% + 8.5rem)); /* 8rem height + 0.5rem gap */
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
     font-family: "qwertyuiop", sans-serif;
