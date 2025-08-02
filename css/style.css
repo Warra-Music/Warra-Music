@@ -712,7 +712,8 @@ a:hover {
     width: clamp(7rem, 8vw, 8rem);
     height: clamp(7rem, 8vw, 8rem);
     top: 40%;
-    left: 34%;
+    left: 38%;
+    transform: translateX(-50%);
     border-radius: clamp(4rem, 5vw, 5rem);
     overflow: hidden;
 }
@@ -738,7 +739,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    left: 34%;
+    transform: translateX(-50%);
+    left: 38%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -765,7 +767,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    left: 58%;
+    transform: translateX(-50%);
+    left: 62%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -778,7 +781,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    left: 53%;
+    transform: translateX(-50%);
+    left: 57%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -791,7 +795,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    left: 39%;
+    transform: translateX(-50%);
+    left: 43%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -836,8 +841,9 @@ a:hover {
     width: clamp(7rem, 8vw, 8rem);
     height: clamp(7rem, 8vw, 8rem);
     top: 40%;
-    left: 58%;
+    left: 62%;
     border-radius: clamp(7rem, 8vw, 8rem);
+    transform: translateX(-50%);
     overflow: hidden;
 }
 
@@ -855,8 +861,9 @@ a:hover {
     width: clamp(7rem, 8vw, 8rem);
     height: clamp(7rem, 8vw, 8rem);
     top: 60%;
-    left: 53%;
+    left: 57%;
     border-radius: clamp(7rem, 8vw, 8rem);
+    transform: translateX(-50%);
     overflow: hidden;
 }
 
@@ -874,8 +881,9 @@ a:hover {
     width: clamp(7rem, 8vw, 8rem);
     height: clamp(7rem, 8vw, 8rem);
     top: 60%;
-    left: 39%;
+    left: 43%;
     border-radius: clamp(7rem, 8vw, 8rem);
+    transform: translateX(-50%);
     overflow: hidden;
 }
 
