@@ -712,8 +712,8 @@ a:hover {
     width: clamp(2rem, 8vw, 8rem);
     height: clamp(2rem, 8vw, 8rem);
     top: 40%;
-    left: 39%;
-    transform: translateX(-50%) translateX(-1rem);
+    left: 41%;
+    transform: translateX(-50%) translateX(-3rem);
     border-radius: clamp(1rem, 4vw, 4rem);
     overflow: hidden;
 }
@@ -739,8 +739,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(-1rem);
-    left: 39%;
+    transform: translateX(-50%) translateX(-3rem);
+    left: 41%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -767,8 +767,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(1rem);
-    left: 61%;
+    transform: translateX(-50%) translateX(3rem);
+    left: 59%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -781,8 +781,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(1rem);
-    left: 56%;
+    transform: translateX(-50%) translateX(3rem);
+    left: 54%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -795,8 +795,8 @@ a:hover {
     font-family: "qwertyuiop", sans-serif;
     white-space: nowrap;
     width: clamp(7rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(-1rem);
-    left: 44%;
+    transform: translateX(-50%) translateX(-3rem);
+    left: 46%;
     pointer-events: none; /* So clicking still works on image */
 }
 
@@ -841,9 +841,9 @@ a:hover {
     width: clamp(2rem, 8vw, 8rem);
     height: clamp(2rem, 8vw, 8rem);
     top: 40%;
-    left: 61%;
+    left: 59%;
     border-radius: clamp(1rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(1rem);
+    transform: translateX(-50%) translateX(3rem);
     overflow: hidden;
 }
 
@@ -861,9 +861,9 @@ a:hover {
     width: clamp(2rem, 8vw, 8rem);
     height: clamp(2rem, 8vw, 8rem);
     top: 60%;
-    left: 56%;
+    left: 54%;
     border-radius: clamp(1rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(1rem);
+    transform: translateX(-50%) translateX(3rem);
     overflow: hidden;
 }
 
@@ -881,9 +881,9 @@ a:hover {
     width: clamp(2rem, 8vw, 8rem);
     height: clamp(2rem, 8vw, 8rem);
     top: 60%;
-    left: 44%;
+    left: 46%;
     border-radius: clamp(1rem, 8vw, 8rem);
-    transform: translateX(-50%) translateX(-1rem);
+    transform: translateX(-50%) translateX(-3rem);
     overflow: hidden;
 }
 
