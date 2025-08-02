@@ -746,7 +746,7 @@ a:hover {
 
 .instrumentText2 {
     position: absolute;
-    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
+    top: clamp(calc(40% + 5rem), calc(40% + 8.5vw), calc(40% + 8.5rem)); /* 8rem height + 0.5rem gap */
     font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
@@ -760,7 +760,7 @@ a:hover {
 
 .instrumentText3 {
     position: absolute;
-    top: calc(40% + 8.5vw); /* 8rem height + 0.5rem gap */
+    top: clamp(calc(40% + 5rem), calc(40% + 8.5vw), calc(40% + 8.5rem)); /* 8rem height + 0.5rem gap */
     font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
@@ -774,7 +774,7 @@ a:hover {
 
 .instrumentText4 {
     position: absolute;
-    top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
+    top: clamp(calc(60% + 5rem), calc(60% + 8.5vw), calc(60% + 8.5rem)); /* 8rem height + 0.5rem gap */
     font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
@@ -788,7 +788,7 @@ a:hover {
 
 .instrumentText5 {
     position: absolute;
-    top: calc(60% + 8.5vw); /* 8rem height + 0.5rem gap */
+    top: clamp(calc(60% + 5rem), calc(60% + 8.5vw), calc(60% + 8.5rem)); /* 8rem height + 0.5rem gap */
     font-size: clamp(1rem, 1.3vw, 1.3rem);
     text-align: center;
     color: white;
@@ -896,9 +896,9 @@ a:hover {
 
 .nav-buttons {
     position: absolute;
-    top: 85%;
+    top: 102.5%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-5rem);
     display: flex;
     gap: 2vw; /* spacing between back and next */
     justify-content: center;
