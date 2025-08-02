@@ -709,12 +709,12 @@ a:hover {
     background-color: red;
     color: white;
     position: absolute;
-    width: clamp(5rem, 8vw, 8rem);
-    height: clamp(5rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 40%;
     left: 38%;
     transform: translateX(-50%);
-    border-radius: clamp(2.5rem, 4vw, 4rem);
+    border-radius: clamp(1rem, 4vw, 4rem);
     overflow: hidden;
 }
 
@@ -1405,3 +1405,4 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
+
