@@ -805,12 +805,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: clamp(3rem, 5vw, 5rem);
+    border-radius: clamp(1rem, 5vw, 5rem);
     overflow: hidden;
 }
 
@@ -825,12 +825,12 @@ a:hover {
     background-color: blue;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: clamp(3rem, 5vw, 5rem);
+    border-radius: clamp(1rem, 5vw, 5rem);
 }
 
 .instruments3 {
@@ -838,11 +838,11 @@ a:hover {
     background-color: green;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 40%;
     left: 62%;
-    border-radius: clamp(7rem, 8vw, 8rem);
+    border-radius: clamp(1rem, 8vw, 8rem);
     transform: translateX(-50%);
     overflow: hidden;
 }
@@ -858,11 +858,11 @@ a:hover {
     background-color: yellow;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 60%;
     left: 57%;
-    border-radius: clamp(7rem, 8vw, 8rem);
+    border-radius: clamp(1rem, 8vw, 8rem);
     transform: translateX(-50%);
     overflow: hidden;
 }
@@ -878,11 +878,11 @@ a:hover {
     background-color: purple;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(2rem, 8vw, 8rem);
+    height: clamp(2rem, 8vw, 8rem);
     top: 60%;
     left: 43%;
-    border-radius: clamp(7rem, 8vw, 8rem);
+    border-radius: clamp(1rem, 8vw, 8rem);
     transform: translateX(-50%);
     overflow: hidden;
 }
@@ -1405,4 +1405,5 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
+
 
