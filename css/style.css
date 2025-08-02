@@ -685,7 +685,7 @@ a:hover {
 
 .page {
     background-color:#17252a;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
 }
 
@@ -709,12 +709,12 @@ a:hover {
     background-color: red;
     color: white;
     position: absolute;
-    width: clamp(7rem, 8vw, 8rem);
-    height: clamp(7rem, 8vw, 8rem);
+    width: clamp(5rem, 8vw, 8rem);
+    height: clamp(5rem, 8vw, 8rem);
     top: 40%;
     left: 38%;
     transform: translateX(-50%);
-    border-radius: clamp(4rem, 5vw, 5rem);
+    border-radius: clamp(2.5rem, 4vw, 4rem);
     overflow: hidden;
 }
 
