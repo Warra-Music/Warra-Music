@@ -894,11 +894,23 @@ a:hover {
 }
 
 
+/* .nav-buttons {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+    align-items: center;
+    bottom: 1vw;
+} */
+
 .nav-buttons {
     position: absolute;
-    top: 120%;
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(-13rem);
+    transform: translateX(-50%) translateY(-8vh);
     display: flex;
     gap: 2vw; /* spacing between back and next */
     justify-content: center;
