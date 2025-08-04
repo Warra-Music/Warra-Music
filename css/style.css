@@ -909,9 +909,9 @@ a:hover {
 
 .nav-buttons {
     position: absolute;
-    top: 50%;
+    top: 85%;
     left: 50%;
-    transform: translateX(-50%) translateY(8.5vw);
+    transform: translateX(-50%);
     display: flex;
     gap: 2vw; /* spacing between back and next */
     justify-content: center;
