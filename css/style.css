@@ -910,7 +910,7 @@ a:hover {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(8rem);
+    transform: translateX(-50%) translateY(8.5vw);
     display: flex;
     gap: 2vw; /* spacing between back and next */
     justify-content: center;
@@ -964,78 +964,79 @@ a:hover {
 .legend {
     position: absolute;
     font-family: "qwertyuiop";
-    font-size: 1vw;
-    bottom: 0.5vw;
+    font-size: 1rem;
+    top: 77%;
     left: 50%;
-    transform: translateX(-50%);
-    height: 2vw;
+    transform: translateX(-50%) translateY(8.5vw);
+    height: 2rem;
     color: white;
+    white-space: nowrap;
 }
 
 .steps_1 {
     position: absolute;
-    width: 8vw;
-    left: -5vw;
+    width: 8rem;
+    transform: translateX(-5.5rem) translateX(0.4vw);
 }
 
 .step1_1 {
     position: absolute;
-    left: 1.25vw;
-    top: 0.2vw;
-    width: 1vw;
-    height: 1vw;
+    left: 1rem;
+    top: 0.2rem;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .step1_2 {
     position: absolute;
-    left: 1.5vw;
-    top: 0.45vw;
-    width: 0.5vw;
-    height: 0.5vw;
+    left: 1.25rem;
+    top: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .step2_1 {
     position: absolute;
-    left: 3vw;
-    top: 0.45vw;
-    width: 0.5vw;
-    height: 0.5vw;
+    left: 2.75rem;
+    top: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .step2_2 {
     position: absolute;
-    left: 2.75vw;
-    top: 0.2vw;
-    width: 1vw;
-    height: 1vw;
+    left: 2.5rem;
+    top: 0.2rem;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .step3_1 {
     position: absolute;
-    left: 4.5vw;
-    top: 0.45vw;
-    width: 0.5vw;
-    height: 0.5vw;
+    left: 4.25rem;
+    top: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .step3_2 {
     position: absolute;
-    left: 4.25vw;
-    top: 0.2vw;
-    width: 1vw;
-    height: 1vw;
+    left: 4rem;
+    top: 0.2rem;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
-    border-radius: 0.5vw;
+    border-radius: 0.5rem;
 }
 
 .beginner {
