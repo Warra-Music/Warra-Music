@@ -685,7 +685,7 @@ a:hover {
 
 .page {
     background-color:#17252a;
-    height: 100vh;
+    height: 100dvh;
     position: relative;
     overflow: hidden;
 }
