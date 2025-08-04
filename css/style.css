@@ -687,6 +687,7 @@ a:hover {
     background-color:#17252a;
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 .instrument {
