@@ -9,7 +9,7 @@
 }
 
 .containerBackground {
-    height: 7.5rem;
+    height: 7.5vw;
     background-color: #17252a;
     color: #fffff7;
     width: 100%;
@@ -22,7 +22,7 @@
 }
 
 .container {
-    min-height: 7.5rem;
+    height: 7.5vw;
     background-color: #17252a86;
     color: #fffff7;
     width: 100%;
@@ -35,7 +35,7 @@
 }
 
 .container:hover {
-    min-height: 7.5rem;
+    min-height: 7.5vw;
     background-color: #17252a;
     color: #fffff7;
     width: 100%;
@@ -50,21 +50,23 @@
 .titleBar {
     position: absolute;
     left: 50%;
-    margin-left: -47.5px;
+    transform: translateX(-50%);
     margin-top: 5px;
 }
 
 .titleBar img {
-    max-inline-size: 100%;
+    height: auto;
+    width: 5.5vw;
+
 }
 
 .menu-button {
-    padding-left: 15px;
-    padding-top: 5px;
+    padding-left: 1vw;
+    padding-top: 0.4vw;
     background-color: transparent;
     border: none;
-    width: 120px;
-    height: 120px;
+    width: 7.5vw;
+    height: 7.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +78,7 @@
 .menu-icon::before,
 .menu-icon::after {
     background-color: white;
-    width: 80px;
+    width: 5vw;
     height: 10px;
     border-radius: 10px;
     position: absolute;
@@ -118,7 +120,7 @@
 
 .menu-wrapper nav {
     position: absolute;
-    top: 7.5rem;
+    top: 7.5vw;
     left: 0;
     width: 30%;
     background-color: #17252a;
@@ -181,7 +183,7 @@ nav a:hover, nav a:focus {
 }
 
 .container_two {
-    top: 7.5rem;
+    top: 7.5vw;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -190,7 +192,7 @@ nav a:hover, nav a:focus {
 }
 
 .false_layers {
-    top: 7.5rem;
+    top: 7.5vw;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -199,7 +201,7 @@ nav a:hover, nav a:focus {
 }
 
 .false_layers2 {
-    top: 7.5rem;
+    top: 7.5vw;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -280,7 +282,7 @@ nav a:hover, nav a:focus {
     width: 50%;
     height: 0;
     padding-bottom: 37.35%;
-    top: 7.5rem;
+    top: 7.5vw;
     left: 50%;
     right: 0px;
     color: #17252a;
@@ -293,7 +295,7 @@ nav a:hover, nav a:focus {
     width: 50%;
     height: 0;
     padding-bottom: 37.35%;
-    top: 7.5rem;
+    top: 7.5vw;
     left: 50%;
     right: 0px;
     font-family: 'qwertyuiop';
@@ -374,8 +376,8 @@ nav a:hover, nav a:focus {
 .link_buffer {
     position: relative;
     width: 100%;
-    top: -7.5rem;
-    height: 7.5rem;
+    top: -7.5vw;
+    height: 7.5vw;
 }
 
 .false_description2 {
@@ -699,7 +701,7 @@ a:hover {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-
+    
     font-family: 'qwertyuiop', sans-serif; 
 }
 
