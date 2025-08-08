@@ -502,46 +502,46 @@ nav a:hover, nav a:focus {
 .contacts {
     color: #704424;
     position: relative;
-    height: 10rem;
+    height: clamp(6rem, 10vw, 14rem);
     width: 50%;
-    top: 10rem;
+    top: clamp(6rem, 10vw, 14rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 2vw, 2.8rem);
 }
 
 .email {
     background-color: #704424;
     color: #F6FFF2;
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 7rem;
+    top: clamp(4.2rem, 7vw, 9.8rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
     z-index: 1;
 }
 
 .special1 {
     position: relative;
-    height: 2rem;
-    top: -2.15rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
+    top: clamp(-3.01rem, -2.15vw, -1.29rem);
     color: #704424;
-    padding-top: 1rem;
-    font-size: 0.1rem;
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
+    font-size: clamp(0.06rem, 0.1vw, 0.14rem);
     border-radius: 25px;
-    text-indent: 0rem;
+    text-indent: 0vw;
     text-decoration: underline;
 }
 
@@ -549,7 +549,7 @@ nav a:hover, nav a:focus {
     position: relative;
     color: rgb(0, 212, 0);
     background-color: #886044;
-    font-size: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
     text-indent: 0;
     border-radius: 100px;
     z-index: 2;
@@ -560,27 +560,27 @@ nav a:hover, nav a:focus {
     background-color: #704424;
     color: #F6FFF2;
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 9rem;
+    top: clamp(5.4rem, 9vw, 12.6rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
 }
 
 .special2 {
     position: relative;
-    height: 2rem;
-    top: -2.15rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
+    top: clamp(-3.01rem, -2.15vw, -1.29rem);
     color: #704424;
-    padding-top: 1rem;
-    font-size: 0.1rem;
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
+    font-size: clamp(0.06rem, 0.1vw, 0.14rem);
     border-radius: 25px;
     text-decoration: underline;
 }
@@ -589,7 +589,7 @@ nav a:hover, nav a:focus {
     position: relative;
     color: rgb(0, 212, 0);
     background-color: #886044;
-    font-size: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
     text-indent: 0;
     text-decoration: none;
 }
@@ -600,17 +600,17 @@ nav a:hover, nav a:focus {
     background-color: #704424;
     color: #F6FFF2;
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 11rem;
+    top: clamp(6.6rem, 11vw, 15.4rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
 }
 
@@ -618,17 +618,17 @@ nav a:hover, nav a:focus {
     background-color: #886044;
     color: rgb(0, 212, 0);
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 11rem;
+    top: clamp(6.6rem, 11vw, 15.4rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
 }
 
@@ -636,17 +636,17 @@ nav a:hover, nav a:focus {
     background-color: #704424;
     color: #F6FFF2;
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 13rem;
+    top: clamp(7.8rem, 13vw, 18.2rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
 }
 
@@ -654,17 +654,17 @@ nav a:hover, nav a:focus {
     background-color: #886044;
     color: rgb(0, 212, 0);
     position: relative;
-    height: 2rem;
+    height: clamp(1.2rem, 2vw, 2.8rem);
     width: 75%;
-    top: 13rem;
+    top: clamp(7.8rem, 13vw, 18.2rem);
     left: 0px;
     margin: auto;
     bottom: 0px;
     right: 0px;
     text-align: center;
     font-family: monospace;
-    font-size: 1rem;
-    padding-top: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.4rem);
+    padding-top: clamp(0.6rem, 1vw, 1.4rem);
     border-radius: 25px;
 }
 
@@ -681,8 +681,8 @@ a:hover {
 .end {
     position: relative;
     background-color: #704424;
-    top: 20.2rem;
-    height: 5rem;
+    top: clamp(12.12rem, 20.2vw, 28.28rem);
+    height: clamp(3rem, 5vw, 7rem);
     width: 100%;
 }
 
