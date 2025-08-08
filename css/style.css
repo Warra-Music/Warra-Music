@@ -9,7 +9,7 @@
 }
 
 .containerBackground {
-    height: 7.5vw;
+    height: clamp(4.5rem, 7.5vw, 10.5rem);
     background-color: #17252a;
     color: #fffff7;
     width: 100%;
@@ -22,7 +22,7 @@
 }
 
 .container {
-    height: 7.5vw;
+    height: clamp(4.5rem, 7.5vw, 10.5rem);
     background-color: #17252a86;
     color: #fffff7;
     width: 100%;
@@ -35,7 +35,7 @@
 }
 
 .container:hover {
-    min-height: 7.5vw;
+    min-height: clamp(4.5rem, 7.5vw, 10.5rem);
     background-color: #17252a;
     color: #fffff7;
     width: 100%;
@@ -56,7 +56,7 @@
 
 .titleBar img {
     height: auto;
-    width: 5.5vw;
+    width: clamp(3.3rem, 5.5vw, 7.7rem);
 
 }
 
@@ -65,8 +65,8 @@
     padding-top: 0.4vw;
     background-color: transparent;
     border: none;
-    width: 7.5vw;
-    height: 7.5vw;
+    width: clamp(4.5rem, 7.5vw, 10.5rem);
+    height: clamp(4.5rem, 7.5vw, 10.5rem);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,9 +78,9 @@
 .menu-icon::before,
 .menu-icon::after {
     background-color: white;
-    width: 5vw;
-    height: 10px;
-    border-radius: 10px;
+    width: clamp(3.1rem,5.3vw, 7.2rem);
+    height: clamp(0.36rem,0.6vw,0.84rem);
+    border-radius: clamp(0.6rem,1vw,1.4rem);
     position: absolute;
     transition: all 0.5s;
 }
@@ -90,12 +90,13 @@
     content: "";
 }
 
+
 .menu-icon::before{
-    transform: translate(-40px, -27px);
+    transform: translate(clamp( -3.7rem, -2.65vw, -1.59rem), clamp(-2.45rem, -1.75vw, -1.05rem));
 }
 
 .menu-icon::after{
-    transform: translate(-40px, 27px);
+    transform: translate(clamp( -3.7rem, -2.65vw, -1.59rem), clamp(1.05rem, 1.75vw, 2.45rem));
 }
 
 :is(.menu-button:hover, .menu-button:focus-within, .menu-wrapper nav:hover) .menu-icon {
@@ -104,11 +105,11 @@
 }
 
 :is(.menu-button:hover, .menu-button:focus-within, .menu-wrapper nav:hover) .menu-icon::before{
-    transform: translateX(-40px) rotate(45deg);
+    transform: translateX(clamp( -3.7rem, -2.65vw, -1.59rem)) rotate(45deg);
 }
 
 :is(.menu-button:hover, .menu-button:focus-within, .menu-wrapper nav:hover) .menu-icon::after{
-    transform: translateX(-40px) rotate(-45deg);
+    transform: translateX(clamp( -3.7rem, -2.65vw, -1.59rem)) rotate(-45deg);
 }
 
 .menu-button:hover + nav, .menu-wrapper nav:hover, .menu-button:focus-within + nav {
@@ -120,7 +121,7 @@
 
 .menu-wrapper nav {
     position: absolute;
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     left: 0;
     width: 30%;
     background-color: #17252a;
@@ -156,7 +157,7 @@ nav ul {
 }
 
 nav li {
-    padding: 2rem 0;
+    padding: 2vw 0;
     font-family: 'qwertyuiop';
     font-size: 2vw;
     border-top: 1px solid white;
@@ -183,7 +184,7 @@ nav a:hover, nav a:focus {
 }
 
 .container_two {
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     position: absolute;
     left: 0px;
     right: 0px;
@@ -192,7 +193,7 @@ nav a:hover, nav a:focus {
 }
 
 .false_layers {
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     position: absolute;
     left: 0px;
     right: 0px;
@@ -201,7 +202,7 @@ nav a:hover, nav a:focus {
 }
 
 .false_layers2 {
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     position: absolute;
     left: 0px;
     right: 0px;
@@ -282,7 +283,7 @@ nav a:hover, nav a:focus {
     width: 50%;
     height: 0;
     padding-bottom: 37.35%;
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     left: 50%;
     right: 0px;
     color: #17252a;
@@ -295,7 +296,7 @@ nav a:hover, nav a:focus {
     width: 50%;
     height: 0;
     padding-bottom: 37.35%;
-    top: 7.5vw;
+    top: clamp(4.5rem, 7.5vw, 10.5rem);
     left: 50%;
     right: 0px;
     font-family: 'qwertyuiop';
@@ -341,7 +342,7 @@ nav a:hover, nav a:focus {
     font-size: 3vw;
     top: 0;
     font-style: italic;
-    padding: 5rem 2rem;
+    padding: 5.2vw 2.1vw;
     width: 65%;
     left: 0;
     box-sizing: border-box;
@@ -358,7 +359,7 @@ nav a:hover, nav a:focus {
     text-align:center;
     font-size: 3vw;
     top: 0;
-    padding: 5rem 2rem;
+    padding: 5.2vw 2.1vw;
     width: 65%;
     left: 100%;
     transform: translateX(-100%);
@@ -376,8 +377,8 @@ nav a:hover, nav a:focus {
 .link_buffer {
     position: relative;
     width: 100%;
-    top: -7.5vw;
-    height: 7.5vw;
+    top: clamp(-10.5rem, -7.5vw, -4.5rem);
+    height: clamp(4.5rem, 7.5vw, 10.5rem);
 }
 
 .false_description2 {
@@ -385,7 +386,7 @@ nav a:hover, nav a:focus {
     text-align:center;
     font-size: 3vw;
     top: 0;
-    padding: 5rem 2rem;
+    padding: 5.2vw 2.1vw;
     width: 65%;
     left: 100%;
     transform: translateX(-100%);
