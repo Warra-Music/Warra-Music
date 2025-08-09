@@ -1047,14 +1047,14 @@ a:hover {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 15vw;
-    height: 4.1vw;
+    width: clamp(13rem, 15vw, 17rem);
+    height: clamp(3rem,4.1vw,5rem);
     top: 10%;
     left: 50%;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.3rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
     transform: translateX(-50%);
-    border-radius: 1vw;
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
 }
 
 .beginner:hover {
@@ -1071,16 +1071,16 @@ input[type=text], input[type=tel] {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 15vw;
-    height: 4.1vw;
+    width: clamp(13rem, 15vw, 17rem);
+    height: clamp(3rem,4.1vw,5rem);
     top: 10%;
     left: auto;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.3rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     color: white;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1091,38 +1091,38 @@ input[type=text]:hover, input[type=tel]:hover {
     background-color: grey;
     color: white;
     position: relative;
-    width: 15vw;
-    height: 4.1vw;
+    width: clamp(13rem, 15vw, 17rem);
+    height: clamp(3rem,4.1vw,5rem);
     top: 10%;
     left: auto;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     outline: solid;
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
 
     font-family: 'qwertyuiop', sans-serif;
     border: 2px solid transparent;  
-    border-radius: 1vw;
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
 }
 
 input[type=text]:focus-within {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 30vw;
-    height: 4.1vw;
+    width: clamp(27rem ,30vw, 33rem);
+    height: clamp(3rem,4.1vw,5rem);
     top: 10%;
     left: auto;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     outline: solid;
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     color: white;
 
     font-family: 'qwertyuiop', sans-serif; 
@@ -1133,16 +1133,16 @@ input[type=tel]:focus-within {
     background-color: rgb(99, 99, 99);
     color: white;
     position: relative;
-    width: 20vw;
-    height: 4.1vw;
+    width: clamp(17rem ,20vw, 24rem);
+    height: clamp(3rem,4.1vw,5rem);
     top: 10%;
     left: auto;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     outline: solid;
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     color: white;
 
     font-family: 'qwertyuiop', sans-serif; 
@@ -1152,8 +1152,8 @@ input[type=tel]:focus-within {
 .form-group {
     position: relative;
     width: 100%;
-    max-width: 15vw;
-    height: 4.1vw;
+    max-width: clamp(13rem, 15vw, 17rem);
+    height: clamp(3rem,4.1vw,5rem);
     left: 50%;
     transform: translateX(-50%);
 }
@@ -1166,12 +1166,12 @@ input[type=date] {
     height: 100%;
     top: 0;
     left: 0;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     color: transparent;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1205,26 +1205,26 @@ label {
     height: 100%;
     top: 0;
     left: 0;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     font-family: 'qwertyuiop', sans-serif;
     border: 2px solid transparent; 
     text-align: center;
 
     color: rgb(170, 170, 170);
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     pointer-events: none;
     background-color: rgb(99, 99, 99);
     z-index: 0;
 }
 
 input[type="date"]:valid + label {
-    height: 1vw;
-    width: 5vw;
+    height: clamp( 0.7rem, 1vw, 1.3rem);
+    width: clamp( 3.5rem, 5vw, 7.5rem);
     top: 0vw;
-    left: 0.5vw;
-    font-size: 0.75vw;
+    left: clamp( 0.35rem, 0.5vw, 0.75rem);
+    font-size: clamp( 0.52rem, 0.75vw, 1.1rem);
     color: white;
     background-color: rgb(99, 99, 99);
     z-index: 3;
@@ -1236,15 +1236,15 @@ input[type="date"]:valid {
     background-color: rgb(99, 99, 99);
     position: absolute;
     width: 216px;
-    height: 4.1vw;
+    height: clamp(3rem,4.1vw,5rem);
     top: 0;
     left: 0;
-    padding-top: 0.9vw;
-    margin-bottom: 2vw;
-    border-radius: 1vw;
+    padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
+    margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
 
     text-align: center;
-    font-size: 2vw;
+    font-size: clamp(1.5rem ,2vw, 2.5rem);
     color: white;
 
     font-family: 'qwertyuiop', sans-serif;
@@ -1257,7 +1257,7 @@ input[type="date"]:valid {
 .booking-container {
     font-family: sans-serif;
     background: white;
-    border-radius: 1vw;
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     width: max-content;
     max-width: 75%;
     text-align: center;
@@ -1268,27 +1268,27 @@ input[type="date"]:valid {
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
-    height: 25vw;
-    top: -2vw;
+    height: clamp(23rem ,25vw, 27rem);
+    top: clamp(-3rem ,-2vw, -1.5rem);
 }
 
 /* Custom Booking Date Wrapper */
 .booking-date-wrapper {
   position: relative;
   left: 50%;
-  margin-top: 1vw;
+  margin-top: clamp( 0.7rem, 1vw, 1.3rem);
   transform: translateX(-50%);
-  padding-left: 0.5vw;
-  padding-right: 0.5vw;
+  padding-left: clamp( 0.35rem, 0.5vw, 0.75rem);
+  padding-right: clamp( 0.35rem, 0.5vw, 0.75rem);
   text-decoration: underline;
   width: 18vw;
-  height: 5vw;
-  border-radius: 1vw;
+  height: clamp( 3.5rem, 5vw, 7.5rem);
+  border-radius: clamp( 0.7rem, 1vw, 1.3rem);
   background-color: rgb(99, 99, 99);
   font-family: 'qwertyuiop', sans-serif;
-  font-size: 2vw;
+  font-size: clamp(0.75rem ,2vw, 2.5rem);
   text-align: center;
-  line-height: 4.1vw;
+  line-height: clamp(3rem,4.1vw,5rem);
   color: rgb(170, 170, 170);
 }
 
@@ -1300,15 +1300,15 @@ input[type="date"]:valid {
 .booking-date {
   background-color: transparent !important;
   position: relative;
-  top: 1vw;
+  top: clamp( 0.7rem, 1vw, 1.3rem);
   left: 50% !important;
   transform: translateX(-50%) !important;
   width: 100%;
   height: 100%;
-  font-size: 2vw !important;
+  font-size: clamp(1.5rem ,2vw, 2.5rem) !important;
   color: transparent !important;
   border: none !important;
-  border-radius: 1vw !important;
+  border-radius: clamp( 0.7rem, 1vw, 1.3rem) !important;
   text-align: center !important;
   cursor: pointer !important;
   z-index: 2 !important;
@@ -1337,22 +1337,22 @@ input[type="date"]:valid {
 
 /* Time Slots */
 .booking-timeslots {
-  margin-top: 2vw;
+  margin-top: clamp(1.5rem ,2vw, 2.5rem);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1vw;
+  gap: clamp( 0.7rem, 1vw, 1.3rem);
 }
 
 .booking-slot {
     position: relative;
-  padding: 0.75vw 1.25vw;
+  padding: clamp( 0.52rem, 0.75vw, 1.1rem) clamp(1rem ,1.25vw, 1.5rem);
   border: 1px solid #333;
   border-radius: 10px;
   cursor: pointer;
   background-color:#17252a;
   transition: 0.2s;
-  font-size: 1.375vw;
+  font-size: clamp(0.5rem,1.375vw,1.6rem);
   color: white !important;
 }
 
@@ -1369,7 +1369,7 @@ input[type="date"]:valid {
 
 /* Confirmation Message */
 .booking-confirmation {
-  margin-top: 2vw;
+  margin-top: clamp(1.5rem ,2vw, 2.5rem);
   font-weight: bold;
   color: green;
 }
@@ -1377,7 +1377,7 @@ input[type="date"]:valid {
 .details {
     position: absolute;
     text-align: center;
-    font-size: 1.8vw;
+    font-size: clamp(1.5rem,1.8vw,2rem);
     color: white;
     top: 16%;
     left: 50%;
@@ -1395,15 +1395,15 @@ input[type="date"]:valid {
     height: min-content;
     top: 10%;
     left: 50%;
-    padding-top: 0.3vw;
-    margin-bottom: 0.75vw;
+    padding-top: clamp(0.2rem,0.3vw,0.4rem)0.3vw;
+    margin-bottom: clamp( 0.52rem, 0.75vw, 1.1rem);
     transform: translateX(-50%);
-    border-radius: 1vw;
-    font-size: 0.9vw;
+    border-radius: clamp( 0.7rem, 1vw, 1.3rem);
+    font-size: clamp(0.7rem, 0.9vw, 1.2rem);
     inline-size: min-content;
     text-wrap: nowrap;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    padding-left: clamp( 0.7rem, 1vw, 1.3rem);
+    padding-right: clamp( 0.7rem, 1vw, 1.3rem);
 }
 
 .detailBlocks p {
@@ -1416,7 +1416,7 @@ input[type="date"]:valid {
 }
 
 .two {
-    margin-left: 5vw;
+    margin-left: clamp( 3.5rem, 5vw, 7.5rem);
 }
 
 .one {
