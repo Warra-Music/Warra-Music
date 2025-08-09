@@ -1400,12 +1400,11 @@ input[type="date"]:valid {
     max-width: 75%;
     top: 10%;
     left: 50%;
-    padding-top: clamp(0.2rem,0.3vw,0.4rem)0.3vw;
+    padding-top: clamp(0.2rem,0.3vw,0.4rem);
     margin-bottom: clamp( 0.52rem, 0.75vw, 1.1rem);
     transform: translateX(-50%);
     border-radius: clamp( 0.7rem, 1vw, 1.3rem);
     font-size: clamp(0.7rem, 0.9vw, 1.2rem);
-    inline-size: min-content;
     text-wrap: nowrap;
     padding-left: clamp( 0.7rem, 1vw, 1.3rem);
     padding-right: clamp( 0.7rem, 1vw, 1.3rem);
@@ -1427,3 +1426,4 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
+
