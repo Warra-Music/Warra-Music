@@ -1397,6 +1397,7 @@ input[type="date"]:valid {
     font-style: underline;
     height: min-content;
     width: max-content;
+    max-width: 75%;
     top: 10%;
     left: 50%;
     padding-top: clamp(0.2rem,0.3vw,0.4rem)0.3vw;
@@ -1426,6 +1427,3 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
-
-
-
