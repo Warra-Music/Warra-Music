@@ -1072,7 +1072,7 @@ input[type=text], input[type=tel] {
     color: white;
     position: relative;
     width: clamp(13rem, 15vw, 17rem);
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     top: 10%;
     left: auto;
     padding-top: clamp(0.7rem, 0.9vw, 1.3rem);
@@ -1092,7 +1092,7 @@ input[type=text]:hover, input[type=tel]:hover {
     color: white;
     position: relative;
     width: clamp(13rem, 15vw, 17rem);
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     top: 10%;
     left: auto;
     padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
@@ -1113,7 +1113,7 @@ input[type=text]:focus-within {
     color: white;
     position: relative;
     width: clamp(27rem ,30vw, 33rem);
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     top: 10%;
     left: auto;
     padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
@@ -1134,7 +1134,7 @@ input[type=tel]:focus-within {
     color: white;
     position: relative;
     width: clamp(17rem ,20vw, 24rem);
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     top: 10%;
     left: auto;
     margin-bottom: clamp(1.5rem ,2vw, 2.5rem);
@@ -1153,7 +1153,7 @@ input[type=tel]:focus-within {
     position: relative;
     width: 100%;
     max-width: clamp(13rem, 15vw, 17rem);
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     left: 50%;
     transform: translateX(-50%);
 }
@@ -1236,7 +1236,7 @@ input[type="date"]:valid {
     background-color: rgb(99, 99, 99);
     position: absolute;
     width: 216px;
-    height: clamp(3rem,4.1vw,5rem);
+    height: clamp(2rem,4.1vw,6rem);
     top: 0;
     left: 0;
     padding-top: clamp(0.7rem, 0.9vw, 1.2rem);
