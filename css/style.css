@@ -229,6 +229,12 @@ nav a:hover, nav a:focus {
     outline-style: solid;
 }
 
+.lets_start2_description_layer2 strong , .lets_start_description_layer2 strong {
+    color: greenyellow;
+    -webkit-text-stroke: 0.1px #17252a;
+    font-style: bold;
+}
+
 .lets_start_button_1 {
     background-color: #2b7a77d5;
     position: absolute;
@@ -245,6 +251,18 @@ nav a:hover, nav a:focus {
     outline-width: 0.3rem;
     outline-style: solid;
 }
+
+.lesson-price {
+    padding-left: 3%;
+    padding-top: 14%;
+    font-size: 2.5vw;
+    color: greenyellow;
+    -webkit-text-stroke: 1px black;
+}
+
+/* .lesson-price strong {
+    color: gold;
+} */
 
 .lets_start_description_layer2 {
     padding-left: 15%;
@@ -1426,4 +1444,3 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
-
