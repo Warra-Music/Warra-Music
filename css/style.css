@@ -229,10 +229,10 @@ nav a:hover, nav a:focus {
     outline-style: solid;
 }
 
-.lets_start2_description_layer2 strong , .lets_start_description_layer2 strong {
+.lets_start2_description_layer2 em , .lets_start_description_layer2 em {
     color: greenyellow;
-    -webkit-text-stroke: 0.01vw #17252a;
-    font-style: bold;
+    -webkit-text-stroke: 0.1vw #17252a;
+    font-style: normal;
 }
 
 .lets_start_button_1 {
@@ -252,7 +252,16 @@ nav a:hover, nav a:focus {
     outline-style: solid;
 }
 
-.lesson-price {
+.private-price {
+    padding-left: 3%;
+    padding-top: 13%;
+    font-size: 2.5vw;
+    color: greenyellow;
+    font-style: bold;
+    -webkit-text-stroke: 0.1vw #17252a;
+}
+
+.online-price {
     padding-left: 3%;
     padding-top: 14%;
     font-size: 2.5vw;
@@ -260,10 +269,6 @@ nav a:hover, nav a:focus {
     font-style: bold;
     -webkit-text-stroke: 0.1vw #17252a;
 }
-
-/* .lesson-price strong {
-    color: gold;
-} */
 
 .lets_start_description_layer2 {
     padding-left: 15%;
@@ -295,6 +300,7 @@ nav a:hover, nav a:focus {
     right: 0px;
     font-family: 'qwertyuiop';
     z-index: 0;
+    
 }
 
 .lets_start_description_box_layer2 {
@@ -332,10 +338,11 @@ nav a:hover, nav a:focus {
 }
 
 .lets_start_oval1 {
-    margin-top: 22%;
+    margin-top: 20.5%;
     margin-left: 50%;
-    border-radius: 25px;
+    border-radius: 2vw;
     outline: solid;
+    outline-width: 0.2vw;
     width: 25%;
     z-index: 1;
     font-size: 1.5vw;
@@ -501,6 +508,7 @@ nav a:hover, nav a:focus {
     margin-left: 50%;
     border-radius: 25px;
     outline: solid;
+    outline-width: 0.2vw;
     width: 25%;
     z-index: 1;
     font-size: 1.5vw;
