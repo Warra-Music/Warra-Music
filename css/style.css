@@ -231,7 +231,7 @@ nav a:hover, nav a:focus {
 
 .lets_start2_description_layer2 strong , .lets_start_description_layer2 strong {
     color: greenyellow;
-    -webkit-text-stroke: 0.1px #17252a;
+    -webkit-text-stroke: 0.01vw #17252a;
     font-style: bold;
 }
 
@@ -257,7 +257,8 @@ nav a:hover, nav a:focus {
     padding-top: 14%;
     font-size: 2.5vw;
     color: greenyellow;
-    -webkit-text-stroke: 1px black;
+    font-style: bold;
+    -webkit-text-stroke: 0.1vw #17252a;
 }
 
 /* .lesson-price strong {
