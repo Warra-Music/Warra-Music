@@ -6,20 +6,20 @@
     <meta name="Me" content="Jason Brogniez">
     <title>Your current levels</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
-    <div class = "page">
-        <div class = "containerBackground">
-            <div class = titleBar>
+    <div class="page">
+        <div class="containerBackground">
+            <div class="titleBar">
                 <p>
-                    <img src = "finalLogo_pic.png" alt = "Logo" title = "Warra Music" height = "105" width = "95" loading = "eager" >
+                    <img src="finalLogo_pic.png" alt="Logo" title="Warra Music" height="105" width="95" loading="eager">
                 </p>
             </div>
-            <div class = "menu-wrapper">
-                <button class = "menu-button">
-                    <div class = "menu-icon">  
-                    </div>
+            <div class="menu-wrapper">
+                <button class="menu-button">
+                    <div class="menu-icon"></div>
                 </button>
                 <nav>
                     <ul>
@@ -32,34 +32,27 @@
             </div>
         </div>
 
-        <div class = "details">
-            <h1>
-                Check your details!
-            </h1>
-
-        
-
+        <div class="details">
+            <h1>Check your details!</h1>
         </div>
 
         <div class="nav-buttons">
-            <a href="index.html" style="text-decoration: none; color: inherit;">
-                <div class="next">
-                    <p>Pay Now! ($10.00)</p>
-                </div>
-            </a>
-</div>
-
-        
+            <button id="checkout-button" class="next">
+                <p>Book lesson now !</p>
+            </button>
+        </div>
     </div>
 
     <script>
+        // Load data from URL (if any)
         const urlParams = new URLSearchParams(window.location.search);
         const dateParam = urlParams.get('date');
         const timeParam = urlParams.get('time');
 
         if (dateParam) localStorage.setItem('bookingDate', dateParam);
         if (timeParam) localStorage.setItem('time', timeParam);
-        // Get values from localStorage
+
+        // Load from localStorage
         const instrument = localStorage.getItem('instrument') || 'Not selected';
         const level = localStorage.getItem('level') || 'Not selected';
         const name = localStorage.getItem('name') || 'Not provided';
@@ -71,51 +64,81 @@
         const weekday = localStorage.getItem('weekday') || 'Not selected';
         const method = localStorage.getItem('method') || 'Not selected';
 
-        // Inject them into the page
+        // Display on page
         document.querySelector('.details').innerHTML += `
-            <div class = "detailBlocks">
+            <div class="detailBlocks">
                 <h2>Your Details</h2>
                 <p>Your Name: ${name}</p>
-                <p>Your Phone Number: ${number} </p>
+                <p>Your Phone Number: ${number}</p>
                 <p>Your Email Address: ${email}</p>
             </div>
-        `;
-
-        document.querySelector('.details').innerHTML += `
-            <div class = "detailBlocks">
+            <div class="detailBlocks">
                 <h2>Booking Details</h2>
                 <p>Instrument: ${instrument}</p>
                 <p>Booking: 30 Minutes Music Lessons</p>
-                <p>Weekday: ${weekday} </p>
+                <p>Weekday: ${weekday}</p>
                 <p>Time: ${time}</p>
                 <p>Start Date: ${bookingDate}</p>
             </div>
-        `;
-
-        document.querySelector('.details').innerHTML += `
-            <div class = "detailBlocks">
+            <div class="detailBlocks">
                 <h2>Where</h2>
                 <p>${method}</p>
             </div>
-        `;
-
-        document.querySelector('.details').innerHTML += `
-            <div class = "detailBlocks">
+            <div class="detailBlocks">
                 <h2>Payment Information</h2>
-                <p>Today, you'll pay a one-time registration fee of $10.00</p>
-                <p>After that, a weekly fee of $40 will be charged starting</p>
-                <p>the day before your first lesson</p>
+                <p>A weekly fee of $40 will be charged</p>
+                <p>starting the day before your first lesson.</p>
+                <p>You can cancel your subscription at any time</p>
             </div>
-        `;
-
-        document.querySelector('.details').innerHTML += `
-            <div class = "detailBlocks">
+            <div class="detailBlocks">
                 <p>By clicking pay now below, you accept and agree to the</p>
                 <p>terms and conditions for music lessons Warra Music.</p>
             </div>
         `;
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
+            const checkoutButton = document.getElementById('checkout-button');
+            
+            checkoutButton.addEventListener('click', function() {
+                // ✅ Save booking details to localStorage before redirect
+                localStorage.setItem('instrument', instrument);
+                localStorage.setItem('level', level);
+                localStorage.setItem('name', name);
+                localStorage.setItem('email', email);
+                localStorage.setItem('number', number);
+                localStorage.setItem('birthDate', birthDate);
+                localStorage.setItem('bookingDate', bookingDate);
+                localStorage.setItem('time', time);
+                localStorage.setItem('weekday', weekday);
+                localStorage.setItem('method', method);
+
+                console.log('📦 Saved booking details to localStorage:', {
+                    instrument, level, name, email, number, birthDate,
+                    bookingDate, time, weekday, method
+                });
+
+                // ✅ Create Checkout Session
+                fetch('http://127.0.0.1:4567/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        instrument, level, name, email, number,
+                        bookingDate, time, weekday, method
+                    })
+                })
+                .then(res => res.json())
+                .then(session => {
+                    const successUrl = `http://127.0.0.1:5500/success.html?session_id=${session.id}&customer_id=${session.customer}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(number)}&method=${encodeURIComponent(method)}&instrument=${encodeURIComponent(instrument)}&bookingDate=${encodeURIComponent(bookingDate)}&weekday=${encodeURIComponent(weekday)}&time=${encodeURIComponent(time)}`;
+                    
+                    return stripe.redirectToCheckout({ sessionId: session.id })
+                        .then(result => {
+                            if (result.error) alert(result.error.message);
+                        });
+                });
+            });
+        });
+        console.log(localStorage.getItem('number'));
     </script>
 </body>
-
 </html>
