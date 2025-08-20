@@ -2,8 +2,10 @@ require 'stripe'
 require 'sinatra'
 require 'json'
 require 'date'
+require 'sinatra/cross_origin'
 
 # Set your Stripe API key
+
 Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
 
 
