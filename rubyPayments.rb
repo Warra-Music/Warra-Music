@@ -1,37 +1,31 @@
-require 'stripe'
 require 'sinatra'
 require 'json'
 require 'date'
+require 'stripe'
 require 'sinatra/cross_origin'
+require 'uri'  # <-- IMPORTANT
 
-# Set your Stripe API key
-
-Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-
-
-# Add at the top of your Ruby file
-require 'sinatra/cross_origin'
+Stripe.api_key = ENV['STRIPE_SECRET_KEY'] # set in Render dashboard
 
 configure do
   enable :cross_origin
+  set :public_folder, '.'
+  set :bind, '0.0.0.0'
 end
 
 before do
-  response.headers['Access-Control-Allow-Origin'] = '*'
-  response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-  response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+  headers 'Access-Control-Allow-Origin' => '*',
+          'Access-Control-Allow-Methods' => 'POST, OPTIONS',
+          'Access-Control-Allow-Headers' => 'Content-Type'
 end
 
 options '*' do
-  response.headers['Allow'] = 'POST, OPTIONS'
+  headers 'Allow' => 'POST, OPTIONS'
   200
 end
 
-set :public_folder, '.'
-
 post '/create-checkout-session' do
   content_type :json
-
   begin
     payload = JSON.parse(request.body.read)
 
@@ -39,51 +33,47 @@ post '/create-checkout-session' do
     trial_end_date = booking_date - 1
     trial_end_unix = [trial_end_date.to_time.to_i, Time.now.to_i + 60].max
 
-    customer = Stripe::Customer.create({
-      name: payload['name'],
+    customer = Stripe::Customer.create(
+      name:  payload['name'],
       email: payload['email'],
       phone: payload['number']
-    })
+    )
 
-    puts "📞 Phone number received: '#{payload['number']}'"
-
-    success_url = "#{request.base_url}/success.html?" \
+    success_url =
+      "#{request.base_url}/success.html?" \
       "session_id={CHECKOUT_SESSION_ID}" \
       "&customer_id=#{customer.id}" \
-      "&name=#{URI.encode_www_form_component(payload['name'])}" \
-      "&email=#{URI.encode_www_form_component(payload['email'])}" \
-      "&instrument=#{URI.encode_www_form_component(payload['instrument'])}" \
-      "&bookingDate=#{URI.encode_www_form_component(payload['bookingDate'])}" \
-      "&weekday=#{URI.encode_www_form_component(payload['weekday'])}" \
-      "&time=#{URI.encode_www_form_component(payload['time'])}" \
-      "&method=#{URI.encode_www_form_component(payload['method'])}" \
-      "&number=#{URI.encode_www_form_component(payload['number'])}" \
+      "&name=#{URI.encode_www_form_component(payload['name'].to_s)}" \
+      "&email=#{URI.encode_www_form_component(payload['email'].to_s)}" \
+      "&instrument=#{URI.encode_www_form_component(payload['instrument'].to_s)}" \
+      "&bookingDate=#{URI.encode_www_form_component(payload['bookingDate'].to_s)}" \
+      "&weekday=#{URI.encode_www_form_component(payload['weekday'].to_s)}" \
+      "&time=#{URI.encode_www_form_component(payload['time'].to_s)}" \
+      "&method=#{URI.encode_www_form_component(payload['method'].to_s)}" \
+      "&number=#{URI.encode_www_form_component(payload['number'].to_s)}"
 
-    session = Stripe::Checkout::Session.create({
+    session = Stripe::Checkout::Session.create(
       customer: customer.id,
+      mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [{
-        price: 'price_1RqYEhBbgLT6ovycotduTf5F',
-        quantity: 1,
+        price: 'price_1RqYEhBbgLT6ovycotduTf5F', # your Stripe Price ID
+        quantity: 1
       }],
-      mode: 'subscription',
-      subscription_data: {
-        trial_end: trial_end_unix,
-      },
+      subscription_data: { trial_end: trial_end_unix },
       success_url: success_url,
-      cancel_url: "#{request.base_url}/canceled.html",
-    })
+      cancel_url: "#{request.base_url}/canceled.html"
+    )
 
+    status 200
     { id: session.id }.to_json
 
   rescue Stripe::StripeError => e
-    puts "🔴 Stripe API Error: #{e.message}"
+    warn "🔴 Stripe API Error: #{e.class}: #{e.message}"
     status 500
     { error: e.message }.to_json
-
   rescue => e
-    puts "🔴 General Error: #{e.message}"
-    puts e.backtrace.join("\n")
+    warn "🔴 General Error: #{e.class}: #{e.message}\n#{e.backtrace&.join("\n")}"
     status 500
     { error: e.message }.to_json
   end
@@ -91,39 +81,23 @@ end
 
 post '/customer-portal' do
   content_type :json
-  
   begin
     payload = JSON.parse(request.body.read)
-    customer_id = payload['customer_id']
-    
-    puts "Creating portal session for customer: #{customer_id}"
-    
-    if !customer_id || customer_id.empty?
-      status 400
-      return { error: "Missing customer_id parameter" }.to_json
-    end
-    
-    # Verify the customer exists
-    begin
-      customer = Stripe::Customer.retrieve(customer_id)
-      puts "Found customer: #{customer.id}, email: #{customer.email}"
-    rescue => e
-      puts "Error retrieving customer: #{e.message}"
-      status 400
-      return { error: "Invalid customer ID or customer not found" }.to_json
-    end
-    
-    # Create portal session
-    session = Stripe::BillingPortal::Session.create({
+    customer_id = payload['customer_id'].to_s
+
+    halt 400, { error: 'Missing customer_id parameter' }.to_json if customer_id.empty?
+
+    # Validate the customer exists (will raise if not)
+    Stripe::Customer.retrieve(customer_id)
+
+    portal = Stripe::BillingPortal::Session.create(
       customer: customer_id,
-      return_url: "#{request.base_url}/account",
-    })
-    
-    puts "Created portal session: #{session.url}"
-    { url: session.url }.to_json
+      return_url: "#{request.base_url}/account"
+    )
+
+    { url: portal.url }.to_json
   rescue => e
-    puts "Error creating portal session: #{e.message}"
-    puts e.backtrace.join("\n")
+    warn "Portal error: #{e.message}"
     status 500
     { error: e.message }.to_json
   end
@@ -131,24 +105,14 @@ end
 
 get '/get-session-info' do
   content_type :json
-  
-  session_id = params['session_id']
-  
   begin
-    session = Stripe::Checkout::Session.retrieve(session_id)
+    session = Stripe::Checkout::Session.retrieve(params['session_id'])
     { customer_id: session.customer }.to_json
-  rescue => e
+  rescue
     status 404
     { error: 'Session not found' }.to_json
   end
 end
 
-get '/' do
-  send_file File.join(settings.public_folder, 'check_your_details.html')
-end
-
-get '/account' do
-  send_file 'account.html'
-end
-
-set :bind, '0.0.0.0'
+get '/'        { send_file File.join(settings.public_folder, 'check_your_details.html') }
+get '/account' { send_file 'account.html' }
