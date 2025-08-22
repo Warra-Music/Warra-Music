@@ -7,11 +7,13 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-    (function() {
-        emailjs.init("V-EYfBiQbIGF9Gvtj"); // Your Public Key
-    })();
+        (function() {
+            emailjs.init("V-EYfBiQbIGF9Gvtj"); // Your Public Key
+        })();
     </script>
+    <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Success page styling */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -92,14 +94,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Read all booking info from URL (fallback to localStorage if missing)
+            // Read booking info from URL or localStorage
             const urlParams = new URLSearchParams(window.location.search);
             const sessionId = urlParams.get('session_id');
             const customerId = urlParams.get('customer_id');
 
             const name = urlParams.get('name') || localStorage.getItem('name') || 'Not provided';
             const email = urlParams.get('email') || localStorage.getItem('email') || 'Not provided';
-            const phone = urlParams.get('number') || localStorage.getItem('number') || 'Not provided';
+            const phone = urlParams.get('phone') || localStorage.getItem('number') || 'Not provided';
             const method = urlParams.get('method') || localStorage.getItem('method') || 'Not selected';
             const instrument = urlParams.get('instrument') || localStorage.getItem('instrument') || 'Not selected';
             const bookingDate = urlParams.get('bookingDate') || localStorage.getItem('bookingDate') || 'Not provided';
@@ -108,7 +110,7 @@
 
             console.log("✅ Booking Info Loaded:", { name, email, phone, method, instrument, bookingDate, weekday, time });
 
-            // ✅ Send emails only if Stripe session info exists
+            // Send emails only if Stripe session info exists
             if (sessionId && customerId) {
                 const customerParams = { name, email, instrument, bookingDate, weekday, time };
                 const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
@@ -123,6 +125,22 @@
             } else {
                 console.error('❌ Missing session_id or customer_id in URL');
             }
+
+            // Manage Account button: redirect to Stripe customer portal
+            document.getElementById('manage-button').addEventListener('click', () => {
+                // Replace with real customer portal session link from your backend
+                fetch(`https://warra-music.onrender.com/create-portal-session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ customerId })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.url) window.location.href = data.url;
+                    else alert("Unable to open portal at this time.");
+                })
+                .catch(err => console.error(err));
+            });
         });
     </script>
 </body>
