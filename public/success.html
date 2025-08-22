@@ -50,8 +50,46 @@ h1 { color: #32CD32; margin-bottom: 20px; }
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
+  const customerIdFromURL = urlParams.get('customer_id');
 
-  // Load booking info from URL or localStorage
+  // Save customer_id from URL if available
+  if (customerIdFromURL) localStorage.setItem('customer_id', customerIdFromURL);
+
+  // Fallback to localStorage
+  const customerId = customerIdFromURL || localStorage.getItem('customer_id');
+
+  const portalButton = document.getElementById('manage-button');
+
+  // Enable button immediately
+  if (customerId) {
+    portalButton.disabled = false;
+    portalButton.textContent = "Manage Account";
+
+    portalButton.addEventListener('click', async () => {
+      portalButton.disabled = true;
+      portalButton.textContent = "Loading…";
+      try {
+        const portalResp = await fetch('https://warra-music.onrender.com/customer-portal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customer_id: customerId })
+        });
+        const portalData = await portalResp.json();
+        if (portalData.url) window.location.href = portalData.url;
+        else throw new Error("No URL returned");
+      } catch (err) {
+        alert("Failed to open Manage Account portal. Check console.");
+        console.error(err);
+        portalButton.disabled = false;
+        portalButton.textContent = "Manage Account";
+      }
+    });
+  } else {
+    portalButton.disabled = true;
+    portalButton.textContent = "Unavailable";
+  }
+
+  // Existing emailjs code remains unchanged
   const name = urlParams.get('name') || localStorage.getItem('name') || 'Not provided';
   const email = urlParams.get('email') || localStorage.getItem('email') || 'Not provided';
   const phone = urlParams.get('number') || localStorage.getItem('number') || 'Not provided';
@@ -61,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const weekday = urlParams.get('weekday') || localStorage.getItem('weekday') || 'Not selected';
   const time = urlParams.get('time') || localStorage.getItem('time') || 'Not selected';
 
-  // Send confirmation emails
   if (sessionId) {
     const customerParams = { name, email, instrument, bookingDate, weekday, time };
     const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
@@ -73,33 +110,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     emailjs.send('service_tcucjoq', 'template_ur23dow', adminParams)
       .then(res => console.log('Admin email sent!', res))
       .catch(err => console.error('Admin email failed', err));
-  }
-
-  // Enable Manage Account button via Stripe Customer Portal
-  try {
-    const resp = await fetch(`https://warra-music.onrender.com/get-session-info?session_id=${sessionId}`);
-    const data = await resp.json();
-    const customerId = data.customer_id;
-
-    const portalButton = document.getElementById('manage-button');
-    portalButton.disabled = false;
-    portalButton.textContent = "Manage Subscription"; // 👈 FIXED here
-    portalButton.addEventListener('click', async () => {
-      try {
-        const portalResp = await fetch('https://warra-music.onrender.com/customer-portal', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ customer_id: customerId })
-        });
-        const portalData = await portalResp.json();
-        window.location.href = portalData.url;
-      } catch (err) {
-        alert('Failed to open Manage Account portal. Check console.');
-        console.error(err);
-      }
-    });
-  } catch (err) {
-    console.error('Failed to load customer ID:', err);
   }
 });
 </script>
