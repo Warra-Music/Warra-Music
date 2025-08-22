@@ -67,9 +67,9 @@
         const method = localStorage.getItem('method') || 'Not selected';
 
         // Function to render details block dynamically
-        function renderDetails(lessonType) {
-            let price = lessonType === "60min" ? 70 : 40;
-            let duration = lessonType === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
+        function renderDetails(plan) {
+            let price = plan === "60min" ? 80 : 40;
+            let duration = plan === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
 
             document.querySelector('.details').innerHTML = `
                 <h1>Check your details!</h1>
@@ -107,18 +107,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
 
-            function handleCheckout(lessonType) {
-                // Re-render details before checkout
-                renderDetails(lessonType);
+            function handleCheckout(plan) {
+                renderDetails(plan);
 
-                // Send booking details to backend
                 fetch('https://warra-music.onrender.com/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         instrument, level, name, email, number,
                         bookingDate, time, weekday, method,
-                        lessonType
+                        plan   // <-- send correct plan to backend
                     })
                 })
                 .then(res => res.json())
