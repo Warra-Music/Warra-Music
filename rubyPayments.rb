@@ -1,84 +1,131 @@
 require 'sinatra'
 require 'json'
+require 'date'
 require 'stripe'
 require 'sinatra/cross_origin'
+require 'uri'
 
-# Enable CORS (so your frontend can call this API)
-configure do
-  enable :cross_origin
-end
-
-# Set your Stripe secret key (from Render environment variables)
+# Stripe API key (set in Render dashboard)
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
-# Allow POST from frontend
+configure do
+  enable :cross_origin
+  set :public_folder, 'public'   # Serve static files from 'public' folder
+  set :bind, '0.0.0.0'
+end
+
 before do
-  content_type :json
+  headers 'Access-Control-Allow-Origin' => '*',
+          'Access-Control-Allow-Methods' => 'POST, OPTIONS, GET',
+          'Access-Control-Allow-Headers' => 'Content-Type'
 end
 
-# Root route (optional)
+options '*' do
+  headers 'Allow' => 'GET, POST, OPTIONS'
+  200
+end
+
+# -------- Static HTML routes --------
 get '/' do
-  "Warra Music Payments Backend is live!"
+  send_file File.join(settings.public_folder, 'check_your_details.html')
 end
 
-# Create Stripe Checkout Session
+get '/currentLevel.html' do
+  send_file File.join(settings.public_folder, 'currentLevel.html')
+end
+
+get '/success.html' do
+  send_file File.join(settings.public_folder, 'success.html')
+end
+
+get '/canceled.html' do
+  send_file File.join(settings.public_folder, 'canceled.html')
+end
+
+get '/account' do
+  send_file File.join(settings.public_folder, 'account.html')
+end
+
+# -------- Stripe Checkout --------
 post '/create-checkout-session' do
-  request.body.rewind
-  data = JSON.parse(request.body.read)
-
-  # Extract fields from frontend
-  instrument    = data['instrument'] || 'Not selected'
-  level         = data['level'] || 'Not selected'
-  name          = data['name'] || 'Not provided'
-  email         = data['email'] || 'Not provided'
-  number        = data['number'] || 'Not provided'
-  bookingDate   = data['bookingDate'] || 'Not provided'
-  time          = data['time'] || 'Not selected'
-  weekday       = data['weekday'] || 'Not selected'
-  method        = data['method'] || 'Not selected'
-
+  content_type :json
   begin
-    # Create Stripe customer
+    payload = JSON.parse(request.body.read)
+
+    booking_date = Date.parse(payload['bookingDate']) rescue Date.today
+    trial_end_date = booking_date - 1
+    trial_end_unix = [trial_end_date.to_time.to_i, Time.now.to_i + 60].max
+
     customer = Stripe::Customer.create(
-      name: name,
-      email: email,
-      phone: number,
-      metadata: {
-        instrument: instrument,
-        level: level,
-        bookingDate: bookingDate,
-        time: time,
-        weekday: weekday,
-        method: method
-      }
+      name:  payload['name'],
+      email: payload['email'],
+      phone: payload['number']
     )
 
-    # Create subscription session
+    success_url = "#{request.base_url}/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id=#{customer.id}"
+
     session = Stripe::Checkout::Session.create(
       customer: customer.id,
-      payment_method_types: ['card'],
       mode: 'subscription',
+      payment_method_types: ['card'],
       line_items: [{
-        price_data: {
-          currency: 'aud',
-          product_data: {
-            name: "30 Minute Music Lessons",
-            description: "Weekly music lessons with Warra Music"
-          },
-          recurring: { interval: 'week' },
-          unit_amount: 4000  # $40 in cents
-        },
+        price: 'price_1RqYEhBbgLT6ovycotduTf5F',
         quantity: 1
       }],
-      success_url: 'https://warramusic.com.au/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id={CUSTOMER_ID}',
-      cancel_url: 'https://warramusic.com.au/cancel.html'
+      subscription_data: { trial_end: trial_end_unix },
+      success_url: success_url,
+      cancel_url: "#{request.base_url}/canceled.html"
     )
 
-    # Return session info to frontend
+    status 200
     { id: session.id, customer: customer.id }.to_json
 
   rescue Stripe::StripeError => e
-    status 400
+    warn "Stripe API Error: #{e.class}: #{e.message}"
+    status 500
+    { error: e.message }.to_json
+  rescue => e
+    warn "General Error: #{e.class}: #{e.message}"
+    status 500
     { error: e.message }.to_json
   end
 end
+
+# -------- Stripe Customer Portal --------
+post '/customer-portal' do
+  content_type :json
+  begin
+    payload = JSON.parse(request.body.read)
+    customer_id = payload['customer_id'].to_s
+
+    halt 400, { error: 'Missing customer_id parameter' }.to_json if customer_id.empty?
+
+    Stripe::Customer.retrieve(customer_id)
+
+    portal = Stripe::BillingPortal::Session.create(
+      customer: customer_id,
+      return_url: "#{request.base_url}/account"
+    )
+
+    { url: portal.url }.to_json
+  rescue => e
+    warn "Portal error: #{e.message}"
+    status 500
+    { error: e.message }.to_json
+  end
+end
+
+# -------- Session info --------
+get '/get-session-info' do
+  content_type :json
+  begin
+    session = Stripe::Checkout::Session.retrieve(params['session_id'])
+    { customer_id: session.customer }.to_json
+  rescue
+    status 404
+    { error: 'Session not found' }.to_json
+  end
+end
+
+# -------- Startup message --------
+puts "🎵 Warra Music Payments Backend is live! 🚀"
