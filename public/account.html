@@ -1,74 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Your Account - Warra Music</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .account-container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-    .button {
-      background-color: #4a7cc7;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>My Account - Warra Music</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="account-container">
-    <h1>Your Music Lessons Account</h1>
-    
-    <div class="account-section">
-      <h2>Your Subscription</h2>
-      <p>Current Plan: Weekly Music Lessons ($40/week)</p>
-      <button id="manage-subscription" class="button">Manage Subscription</button>
-    </div>
-    
-    <div class="account-section">
-      <h2>Your Schedule</h2>
-      <p>Lessons scheduled for: <span id="lesson-day">Wednesdays</span> at <span id="lesson-time">4:00 PM</span></p>
-    </div>
+  <div class="container">
+    <h1>My Account</h1>
+    <p>Manage your subscription below.</p>
+
+    <button id="manage-button" class="manage-button">Manage Subscription</button>
   </div>
-  
+
   <script>
-    document.getElementById('manage-subscription').addEventListener('click', async function() {
-      try {
-        const customerId = localStorage.getItem('customer_id');
-        
-        if (!customerId) {
-          alert('Please log in to manage your subscription');
-          return;
-        }
-        
-        const response = await fetch('/customer-portal', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            customer_id: customerId
-          })
-        });
-        
-        const result = await response.json();
-        
-        if (result.url) {
-          window.location.href = result.url;
-        } else {
-          alert('Could not access subscription management');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred');
+    document.addEventListener('DOMContentLoaded', () => {
+      const customerId = localStorage.getItem('customer_id');
+      const portalButton = document.getElementById('manage-button');
+
+      if (!customerId) {
+        portalButton.disabled = true;
+        portalButton.textContent = "Unavailable";
+        return;
       }
+
+      portalButton.addEventListener('click', async () => {
+        portalButton.disabled = true;
+        portalButton.textContent = "Loading...";
+
+        try {
+          const resp = await fetch('https://warra-music.onrender.com/customer-portal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customer_id: customerId })
+          });
+
+          const data = await resp.json();
+
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            alert("Unable to open Manage Account portal.");
+            console.error(data);
+            portalButton.disabled = false;
+            portalButton.textContent = "Manage Subscription";
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Failed to open Manage Account portal.");
+          portalButton.disabled = false;
+          portalButton.textContent = "Manage Subscription";
+        }
+      });
     });
   </script>
 </body>
