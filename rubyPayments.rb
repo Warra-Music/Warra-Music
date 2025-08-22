@@ -62,7 +62,7 @@ post '/create-checkout-session' do
                when '30min'
                  'price_1RqYEhBbgLT6ovycotduTf5F' # $40/week
                when '60min'
-                 'price_1RyvsoBbgLT6ovycfOwrQurL'                   # $80/week, replace with your actual Stripe ID
+                 'price_1RyvsoBbgLT6ovycfOwrQurL' # $80/week
                else
                  halt 400, { error: 'Invalid plan selected' }.to_json
                end
