@@ -44,15 +44,14 @@
     </div>
 
     <script>
-        // Load data from URL (if any)
+        // Load query params into localStorage
         const urlParams = new URLSearchParams(window.location.search);
         const dateParam = urlParams.get('date');
         const timeParam = urlParams.get('time');
-
         if (dateParam) localStorage.setItem('bookingDate', dateParam);
         if (timeParam) localStorage.setItem('time', timeParam);
 
-        // Load from localStorage
+        // Grab saved values
         const instrument = localStorage.getItem('instrument') || 'Not selected';
         const level = localStorage.getItem('level') || 'Not selected';
         const name = localStorage.getItem('name') || 'Not provided';
@@ -64,7 +63,7 @@
         const weekday = localStorage.getItem('weekday') || 'Not selected';
         const method = localStorage.getItem('method') || 'Not selected';
 
-        // Display on page
+        // Show details on page
         document.querySelector('.details').innerHTML += `
             <div class="detailBlocks">
                 <h2>Your Details</h2>
@@ -101,24 +100,7 @@
             const checkoutButton = document.getElementById('checkout-button');
             
             checkoutButton.addEventListener('click', function() {
-                // ✅ Save booking details to localStorage before redirect
-                localStorage.setItem('instrument', instrument);
-                localStorage.setItem('level', level);
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
-                localStorage.setItem('number', number);
-                localStorage.setItem('birthDate', birthDate);
-                localStorage.setItem('bookingDate', bookingDate);
-                localStorage.setItem('time', time);
-                localStorage.setItem('weekday', weekday);
-                localStorage.setItem('method', method);
-
-                console.log('📦 Saved booking details to localStorage:', {
-                    instrument, level, name, email, number, birthDate,
-                    bookingDate, time, weekday, method
-                });
-
-                // ✅ Create Checkout Session
+                // Send booking details to backend
                 fetch('https://warra-music.onrender.com/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -129,15 +111,21 @@
                 })
                 .then(res => res.json())
                 .then(session => {
-                    const successUrl = `https://warramusic.com.au/success.html?session_id=${session.id}&customer_id=${session.customer}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(number)}&method=${encodeURIComponent(method)}&instrument=${encodeURIComponent(instrument)}&bookingDate=${encodeURIComponent(bookingDate)}&weekday=${encodeURIComponent(weekday)}&time=${encodeURIComponent(time)}`;
-                    return stripe.redirectToCheckout({ sessionId: session.id })
-                        .then(result => {
-                            if (result.error) alert(result.error.message);
-                        });
+                    if (!session.id) {
+                        alert("⚠️ Stripe session not created. Check your backend logs.");
+                        return;
+                    }
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(result => {
+                    if (result && result.error) alert(result.error.message);
+                })
+                .catch(err => {
+                    console.error("❌ Error creating checkout session:", err);
+                    alert("Failed to start checkout. Check console for details.");
                 });
             });
         });
-        console.log(localStorage.getItem('number'));
     </script>
 </body>
 </html>
