@@ -1,124 +1,84 @@
 require 'sinatra'
 require 'json'
-require 'date'
 require 'stripe'
 require 'sinatra/cross_origin'
-require 'uri'  # <-- IMPORTANT
 
-Stripe.api_key = ENV['STRIPE_SECRET_KEY'] # set in Render dashboard
-
+# Enable CORS (so your frontend can call this API)
 configure do
   enable :cross_origin
-  set :public_folder, '.'
-  set :bind, '0.0.0.0'
 end
 
+# Set your Stripe secret key (from Render environment variables)
+Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+
+# Allow POST from frontend
 before do
-  headers 'Access-Control-Allow-Origin' => '*',
-          'Access-Control-Allow-Methods' => 'POST, OPTIONS',
-          'Access-Control-Allow-Headers' => 'Content-Type'
-end
-
-options '*' do
-  headers 'Allow' => 'POST, OPTIONS'
-  200
-end
-
-post '/create-checkout-session' do
   content_type :json
+end
+
+# Root route (optional)
+get '/' do
+  "Warra Music Payments Backend is live!"
+end
+
+# Create Stripe Checkout Session
+post '/create-checkout-session' do
+  request.body.rewind
+  data = JSON.parse(request.body.read)
+
+  # Extract fields from frontend
+  instrument    = data['instrument'] || 'Not selected'
+  level         = data['level'] || 'Not selected'
+  name          = data['name'] || 'Not provided'
+  email         = data['email'] || 'Not provided'
+  number        = data['number'] || 'Not provided'
+  bookingDate   = data['bookingDate'] || 'Not provided'
+  time          = data['time'] || 'Not selected'
+  weekday       = data['weekday'] || 'Not selected'
+  method        = data['method'] || 'Not selected'
+
   begin
-    payload = JSON.parse(request.body.read)
-
-    booking_date = Date.parse(payload['bookingDate']) rescue Date.today
-    trial_end_date = booking_date - 1
-    trial_end_unix = [trial_end_date.to_time.to_i, Time.now.to_i + 60].max
-
+    # Create Stripe customer
     customer = Stripe::Customer.create(
-      name:  payload['name'],
-      email: payload['email'],
-      phone: payload['number']
+      name: name,
+      email: email,
+      phone: number,
+      metadata: {
+        instrument: instrument,
+        level: level,
+        bookingDate: bookingDate,
+        time: time,
+        weekday: weekday,
+        method: method
+      }
     )
 
-    success_url =
-      "#{request.base_url}/success.html?" \
-      "session_id={CHECKOUT_SESSION_ID}" \
-      "&customer_id=#{customer.id}" \
-      "&name=#{URI.encode_www_form_component(payload['name'].to_s)}" \
-      "&email=#{URI.encode_www_form_component(payload['email'].to_s)}" \
-      "&instrument=#{URI.encode_www_form_component(payload['instrument'].to_s)}" \
-      "&bookingDate=#{URI.encode_www_form_component(payload['bookingDate'].to_s)}" \
-      "&weekday=#{URI.encode_www_form_component(payload['weekday'].to_s)}" \
-      "&time=#{URI.encode_www_form_component(payload['time'].to_s)}" \
-      "&method=#{URI.encode_www_form_component(payload['method'].to_s)}" \
-      "&number=#{URI.encode_www_form_component(payload['number'].to_s)}"
-
+    # Create subscription session
     session = Stripe::Checkout::Session.create(
       customer: customer.id,
-      mode: 'subscription',
       payment_method_types: ['card'],
+      mode: 'subscription',
       line_items: [{
-        price: 'price_1RqYEhBbgLT6ovycotduTf5F', # your Stripe Price ID
+        price_data: {
+          currency: 'aud',
+          product_data: {
+            name: "30 Minute Music Lessons",
+            description: "Weekly music lessons with Warra Music"
+          },
+          recurring: { interval: 'week' },
+          unit_amount: 4000  # $40 in cents
+        },
         quantity: 1
       }],
-      subscription_data: { trial_end: trial_end_unix },
-      success_url: success_url,
-      cancel_url: "#{request.base_url}/canceled.html"
+      success_url: 'https://warramusic.com.au/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id={CUSTOMER_ID}',
+      cancel_url: 'https://warramusic.com.au/cancel.html'
     )
 
-    status 200
-    { id: session.id }.to_json
+    # Return session info to frontend
+    { id: session.id, customer: customer.id }.to_json
 
   rescue Stripe::StripeError => e
-    warn "🔴 Stripe API Error: #{e.class}: #{e.message}"
-    status 500
-    { error: e.message }.to_json
-  rescue => e
-    warn "🔴 General Error: #{e.class}: #{e.message}\n#{e.backtrace&.join("\n")}"
-    status 500
+    status 400
     { error: e.message }.to_json
   end
-end
-
-post '/customer-portal' do
-  content_type :json
-  begin
-    payload = JSON.parse(request.body.read)
-    customer_id = payload['customer_id'].to_s
-
-    halt 400, { error: 'Missing customer_id parameter' }.to_json if customer_id.empty?
-
-    # Validate the customer exists (will raise if not)
-    Stripe::Customer.retrieve(customer_id)
-
-    portal = Stripe::BillingPortal::Session.create(
-      customer: customer_id,
-      return_url: "#{request.base_url}/account"
-    )
-
-    { url: portal.url }.to_json
-  rescue => e
-    warn "Portal error: #{e.message}"
-    status 500
-    { error: e.message }.to_json
-  end
-end
-
-get '/get-session-info' do
-  content_type :json
-  begin
-    session = Stripe::Checkout::Session.retrieve(params['session_id'])
-    { customer_id: session.customer }.to_json
-  rescue
-    status 404
-    { error: 'Session not found' }.to_json
-  end
-end
-
-# ✅ FIXED ROUTE SYNTAX FOR RUBY 3.4
-get '/' do
-  send_file File.join(settings.public_folder, 'check_your_details.html')
-end
-
-get '/account' do
-  send_file 'account.html'
 end
