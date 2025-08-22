@@ -19,6 +19,7 @@ h1 { color: #32CD32; margin-bottom: 20px; }
 .manage-button:hover { background-color: #3a67ad; }
 .manage-button:disabled { background-color: #888; cursor: not-allowed; }
 .important-note { font-weight: bold; color: #d35400; }
+.status-msg { margin-top: 15px; font-size: 14px; color: #ffd700; }
 </style>
 </head>
 <body>
@@ -41,8 +42,9 @@ h1 { color: #32CD32; margin-bottom: 20px; }
 
   <div class="info-section">
     <h2>Manage Your Subscription</h2>
-    <p>Need to update your payment method or manage your subscription?</p>
+    <p>A link to manage your subscription has been sent to your email.</p>
     <button id="manage-button" class="manage-button" disabled>Loading…</button>
+    <div id="status-msg" class="status-msg"></div>
   </div>
 </div>
 
@@ -52,64 +54,68 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sessionId = urlParams.get('session_id');
   const customerIdFromURL = urlParams.get('customer_id');
 
-  // Save customer_id from URL if available
   if (customerIdFromURL) localStorage.setItem('customer_id', customerIdFromURL);
-
-  // Fallback to localStorage
   const customerId = customerIdFromURL || localStorage.getItem('customer_id');
 
-  const portalButton = document.getElementById('manage-button');
-
-  // Enable button immediately
-  if (customerId) {
-    portalButton.disabled = false;
-    portalButton.textContent = "Manage Account";
-
-    portalButton.addEventListener('click', async () => {
-      portalButton.disabled = true;
-      portalButton.textContent = "Loading…";
-      try {
-        const portalResp = await fetch('https://warra-music.onrender.com/customer-portal', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ customer_id: customerId })
-        });
-        const portalData = await portalResp.json();
-        if (portalData.url) window.location.href = portalData.url;
-        else throw new Error("No URL returned");
-      } catch (err) {
-        alert("Failed to open Manage Account portal. Check console.");
-        console.error(err);
-        portalButton.disabled = false;
-        portalButton.textContent = "Manage Account";
-      }
-    });
-  } else {
-    portalButton.disabled = true;
-    portalButton.textContent = "Unavailable";
-  }
-
-  // Existing emailjs code remains unchanged
   const name = urlParams.get('name') || localStorage.getItem('name') || 'Not provided';
   const email = urlParams.get('email') || localStorage.getItem('email') || 'Not provided';
   const phone = urlParams.get('number') || localStorage.getItem('number') || 'Not provided';
-  const method = urlParams.get('method') || localStorage.getItem('method') || 'Not selected';
   const instrument = urlParams.get('instrument') || localStorage.getItem('instrument') || 'Not selected';
   const bookingDate = urlParams.get('bookingDate') || localStorage.getItem('bookingDate') || 'Not provided';
   const weekday = urlParams.get('weekday') || localStorage.getItem('weekday') || 'Not selected';
   const time = urlParams.get('time') || localStorage.getItem('time') || 'Not selected';
+  const method = urlParams.get('method') || localStorage.getItem('method') || 'Not selected';
 
-  if (sessionId) {
-    const customerParams = { name, email, instrument, bookingDate, weekday, time };
-    const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
+  const portalButton = document.getElementById('manage-button');
+  const statusMsg = document.getElementById('status-msg');
 
-    emailjs.send('service_tcucjoq', 'template_q0grmef', customerParams)
+  if (!customerId || !sessionId) {
+    portalButton.disabled = true;
+    portalButton.textContent = "Unavailable";
+    statusMsg.textContent = "Customer ID not found. Please complete a booking first.";
+    return;
+  }
+
+  try {
+    // Get portal URL from backend
+    const portalResp = await fetch('https://warra-music.onrender.com/customer-portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customer_id: customerId })
+    });
+    const portalData = await portalResp.json();
+    const portalUrl = portalData.url || '#';
+
+    // Enable button on page
+    portalButton.disabled = false;
+    portalButton.textContent = "Manage Account";
+    portalButton.addEventListener('click', () => {
+      window.location.href = portalUrl;
+    });
+
+    // Send email to customer with manage subscription link
+    const customerParams = {
+      name, email, instrument, bookingDate, weekday, time, method,
+      manage_subscription_url: portalUrl
+    };
+
+    await emailjs.send('service_tcucjoq', 'template_q0grmef', customerParams)
       .then(res => console.log('Customer email sent!', res))
       .catch(err => console.error('Customer email failed', err));
 
-    emailjs.send('service_tcucjoq', 'template_ur23dow', adminParams)
+    // Send admin email
+    const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
+    await emailjs.send('service_tcucjoq', 'template_ur23dow', adminParams)
       .then(res => console.log('Admin email sent!', res))
       .catch(err => console.error('Admin email failed', err));
+
+    statusMsg.textContent = "A link to manage your subscription has been sent to your email.";
+
+  } catch (err) {
+    console.error("Error generating portal link or sending email:", err);
+    portalButton.disabled = true;
+    portalButton.textContent = "Unavailable";
+    statusMsg.textContent = "Failed to generate subscription link. Check console for details.";
   }
 });
 </script>
