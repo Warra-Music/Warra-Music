@@ -1,159 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Complete - Warra Music</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        (function() {
-            emailjs.init("V-EYfBiQbIGF9Gvtj"); // Your Public Key
-        })();
-    </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: black;
-            background-color: #17252a;
-            margin: 0;
-            padding: 0;
-        }
-        .success-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            background-color: #3aafa9a5;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .success-icon {
-            color: #32CD32;
-            font-size: 60px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #32CD32;
-            margin-bottom: 20px;
-        }
-        .info-section {
-            margin: 25px 0;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f0f8ff;
-            text-align: left;
-        }
-        .manage-button {
-            background-color: #4a7cc7;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-        .manage-button:hover {
-            background-color: #3a67ad;
-        }
-        .important-note {
-            font-weight: bold;
-            color: #d35400;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Complete - Warra Music</title>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){ emailjs.init("V-EYfBiQbIGF9Gvtj"); })();
+</script>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; color: black; background-color: #17252a; margin:0; padding:0; }
+.success-container { max-width: 600px; margin: 50px auto; padding: 30px; text-align: center; border-radius: 10px; background-color: #3aafa9a5; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.success-icon { color: #32CD32; font-size: 60px; margin-bottom: 20px; }
+h1 { color: #32CD32; margin-bottom: 20px; }
+.info-section { margin: 25px 0; padding: 20px; border-radius: 8px; background-color: #f0f8ff; text-align: left; }
+.manage-button { background-color: #4a7cc7; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 20px; transition: background-color 0.3s; }
+.manage-button:hover { background-color: #3a67ad; }
+.manage-button:disabled { background-color: #888; cursor: not-allowed; }
+.important-note { font-weight: bold; color: #d35400; }
+</style>
 </head>
 <body>
-    <div class="success-container">
-        <div class="success-icon">✓</div>
-        <h1>Registration Complete!</h1>
-        <p>Thank you for booking with Warra Music. Your registration was successful!</p>
-        
-        <div class="info-section">
-            <h2>Payment Summary</h2>
-            <p>Weekly Lessons: <strong>$40.00 per week</strong></p>
-            <p class="important-note">Your first weekly payment will be processed the day before your first lesson.</p>
-        </div>
-        
-        <div class="info-section">
-            <h2>Next Steps</h2>
-            <p>Your instructor will contact you soon to confirm your first lesson.</p>
-            <p>Keep an eye on your email for important updates about your lessons.</p>
-        </div>
-        
-        <div class="info-section">
-            <h2>Manage Your Subscription</h2>
-            <p>Need to update your payment method or manage your subscription?</p>
-            <button id="manage-button" class="manage-button">Manage Account</button>
-        </div>
-    </div>
+<div class="success-container">
+  <div class="success-icon">✓</div>
+  <h1>Registration Complete!</h1>
+  <p>Thank you for booking with Warra Music. Your registration was successful!</p>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const manageBtn = document.getElementById('manage-button');
-            const urlParams = new URLSearchParams(window.location.search);
-            const sessionId = urlParams.get('session_id');
-            const customerId = urlParams.get('customer_id');
+  <div class="info-section">
+    <h2>Payment Summary</h2>
+    <p>Weekly Lessons: <strong>$40.00 per week</strong></p>
+    <p class="important-note">Your first weekly payment will be processed the day before your first lesson.</p>
+  </div>
 
-            const name = urlParams.get('name') || localStorage.getItem('name') || 'Not provided';
-            const email = urlParams.get('email') || localStorage.getItem('email') || 'Not provided';
-            const phone = urlParams.get('phone') || localStorage.getItem('number') || 'Not provided';
-            const method = urlParams.get('method') || localStorage.getItem('method') || 'Not selected';
-            const instrument = urlParams.get('instrument') || localStorage.getItem('instrument') || 'Not selected';
-            const bookingDate = urlParams.get('bookingDate') || localStorage.getItem('bookingDate') || 'Not provided';
-            const weekday = urlParams.get('weekday') || localStorage.getItem('weekday') || 'Not selected';
-            const time = urlParams.get('time') || localStorage.getItem('time') || 'Not selected';
+  <div class="info-section">
+    <h2>Next Steps</h2>
+    <p>Your instructor will contact you soon to confirm your first lesson.</p>
+    <p>Keep an eye on your email for important updates about your lessons.</p>
+  </div>
 
-            console.log("✅ Booking Info Loaded:", { name, email, phone, method, instrument, bookingDate, weekday, time });
+  <div class="info-section">
+    <h2>Manage Your Subscription</h2>
+    <p>Need to update your payment method or manage your subscription?</p>
+    <button id="manage-button" class="manage-button" disabled>Loading…</button>
+  </div>
+</div>
 
-            // Send emails if Stripe session info exists
-            if (sessionId && customerId) {
-                const customerParams = { name, email, instrument, bookingDate, weekday, time };
-                const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get('session_id');
 
-                emailjs.send('service_tcucjoq', 'template_q0grmef', customerParams)
-                    .then(res => console.log('✅ Email to customer sent!', res))
-                    .catch(err => console.error('❌ Customer email failed', err));
+  // Load booking info from URL or localStorage
+  const name = urlParams.get('name') || localStorage.getItem('name') || 'Not provided';
+  const email = urlParams.get('email') || localStorage.getItem('email') || 'Not provided';
+  const phone = urlParams.get('number') || localStorage.getItem('number') || 'Not provided';
+  const method = urlParams.get('method') || localStorage.getItem('method') || 'Not selected';
+  const instrument = urlParams.get('instrument') || localStorage.getItem('instrument') || 'Not selected';
+  const bookingDate = urlParams.get('bookingDate') || localStorage.getItem('bookingDate') || 'Not provided';
+  const weekday = urlParams.get('weekday') || localStorage.getItem('weekday') || 'Not selected';
+  const time = urlParams.get('time') || localStorage.getItem('time') || 'Not selected';
 
-                emailjs.send('service_tcucjoq', 'template_ur23dow', adminParams)
-                    .then(res => console.log('✅ Admin notification email sent!', res))
-                    .catch(err => console.error('❌ Admin email failed', err));
-            } else {
-                console.error('❌ Missing session_id or customer_id in URL');
-            }
+  // Send confirmation emails
+  if (sessionId) {
+    const customerParams = { name, email, instrument, bookingDate, weekday, time };
+    const adminParams = { name, email, phone, instrument, bookingDate, weekday, time, method };
 
-            // Manage Account button logic
-            if (!customerId) {
-                manageBtn.disabled = true;
-                manageBtn.innerText = "Manage Account (Unavailable)";
-                return;
-            }
+    emailjs.send('service_tcucjoq', 'template_q0grmef', customerParams)
+      .then(res => console.log('Customer email sent!', res))
+      .catch(err => console.error('Customer email failed', err));
 
-            fetch('https://warra-music.onrender.com/create-portal-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ customerId })
-            })
-            .then(res => res.json())
-            .then(data => {
-                const portalUrl = data.url;
-                if (portalUrl) {
-                    manageBtn.addEventListener('click', () => {
-                        window.location.href = portalUrl;
-                    });
-                } else {
-                    manageBtn.disabled = true;
-                    manageBtn.innerText = "Manage Account (Unavailable)";
-                }
-            })
-            .catch(err => {
-                console.error('❌ Error fetching portal URL:', err);
-                manageBtn.disabled = true;
-                manageBtn.innerText = "Manage Account (Unavailable)";
-            });
+    emailjs.send('service_tcucjoq', 'template_ur23dow', adminParams)
+      .then(res => console.log('Admin email sent!', res))
+      .catch(err => console.error('Admin email failed', err));
+  }
+
+  // Enable Manage Account button via Stripe Customer Portal
+  try {
+    const resp = await fetch(`https://warra-music.onrender.com/get-session-info?session_id=${sessionId}`);
+    const data = await resp.json();
+    const customerId = data.customer_id;
+
+    const portalButton = document.getElementById('manage-button');
+    portalButton.disabled = false;
+    portalButton.addEventListener('click', async () => {
+      try {
+        const portalResp = await fetch('https://warra-music.onrender.com/customer-portal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customer_id: customerId })
         });
-    </script>
+        const portalData = await portalResp.json();
+        window.location.href = portalData.url;
+      } catch (err) {
+        alert('Failed to open Manage Account portal. Check console.');
+        console.error(err);
+      }
+    });
+  } catch (err) {
+    console.error('Failed to load customer ID:', err);
+  }
+});
+</script>
 </body>
 </html>
