@@ -114,5 +114,11 @@ get '/get-session-info' do
   end
 end
 
-get '/'        { send_file File.join(settings.public_folder, 'check_your_details.html') }
-get '/account' { send_file 'account.html' }
+# ✅ FIXED ROUTE SYNTAX FOR RUBY 3.4
+get '/' do
+  send_file File.join(settings.public_folder, 'check_your_details.html')
+end
+
+get '/account' do
+  send_file 'account.html'
+end
