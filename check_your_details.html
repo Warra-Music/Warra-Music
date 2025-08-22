@@ -119,7 +119,7 @@
                 });
 
                 // ✅ Create Checkout Session
-                fetch('http://warra-music.onrender.com/create-checkout-session', {
+                fetch('https://warra-music.onrender.com/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -129,8 +129,7 @@
                 })
                 .then(res => res.json())
                 .then(session => {
-                    const successUrl = `http://127.0.0.1:5500/success.html?session_id=${session.id}&customer_id=${session.customer}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(number)}&method=${encodeURIComponent(method)}&instrument=${encodeURIComponent(instrument)}&bookingDate=${encodeURIComponent(bookingDate)}&weekday=${encodeURIComponent(weekday)}&time=${encodeURIComponent(time)}`;
-                    
+                    const successUrl = `https://warramusic.com.au/success.html?session_id=${session.id}&customer_id=${session.customer}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(number)}&method=${encodeURIComponent(method)}&instrument=${encodeURIComponent(instrument)}&bookingDate=${encodeURIComponent(bookingDate)}&weekday=${encodeURIComponent(weekday)}&time=${encodeURIComponent(time)}`;
                     return stripe.redirectToCheckout({ sessionId: session.id })
                         .then(result => {
                             if (result.error) alert(result.error.message);
