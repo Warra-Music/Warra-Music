@@ -2,31 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account - Warra Music</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #17252a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #3aafa9a5;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    .manage-button {
+      background-color: #4a7cc7;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    .manage-button:hover:not(:disabled) {
+      background-color: #3a67ad;
+    }
+    .manage-button:disabled {
+      background-color: #888;
+      cursor: not-allowed;
+    }
+    .status-msg {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ffd700;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>My Account</h1>
     <p>Manage your subscription below.</p>
-
-    <button id="manage-button" class="manage-button">Manage Subscription</button>
+    <button id="manage-button" class="manage-button" aria-label="Manage your subscription" disabled>Loading…</button>
+    <div id="status-msg" class="status-msg"></div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const customerId = localStorage.getItem('customer_id');
+      const urlParams = new URLSearchParams(window.location.search);
+      const customerIdFromURL = urlParams.get('customer_id');
       const portalButton = document.getElementById('manage-button');
+      const statusMsg = document.getElementById('status-msg');
+
+      // Save customer_id from URL if available
+      if (customerIdFromURL) {
+        localStorage.setItem('customer_id', customerIdFromURL);
+      }
+
+      // Fallback to localStorage
+      const customerId = customerIdFromURL || localStorage.getItem('customer_id');
 
       if (!customerId) {
         portalButton.disabled = true;
         portalButton.textContent = "Unavailable";
+        statusMsg.textContent = "Customer ID not found. Please complete a booking first.";
         return;
       }
 
+      // Enable button
+      portalButton.disabled = false;
+      portalButton.textContent = "Manage Subscription";
+
       portalButton.addEventListener('click', async () => {
         portalButton.disabled = true;
-        portalButton.textContent = "Loading...";
+        portalButton.textContent = "Redirecting…";
+        statusMsg.textContent = "";
 
         try {
           const resp = await fetch('https://warra-music.onrender.com/customer-portal', {
@@ -36,20 +100,17 @@
           });
 
           const data = await resp.json();
-
           if (data.url) {
             window.location.href = data.url;
           } else {
-            alert("Unable to open Manage Account portal.");
-            console.error(data);
-            portalButton.disabled = false;
-            portalButton.textContent = "Manage Subscription";
+            throw new Error("No URL returned from backend.");
           }
+
         } catch (err) {
           console.error(err);
-          alert("Failed to open Manage Account portal.");
           portalButton.disabled = false;
           portalButton.textContent = "Manage Subscription";
+          statusMsg.textContent = "Failed to open portal. Check console for details.";
         }
       });
     });
