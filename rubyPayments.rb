@@ -56,6 +56,17 @@ post '/create-checkout-session' do
     trial_end_date = booking_date - 1
     trial_end_unix = [trial_end_date.to_time.to_i, Time.now.to_i + 60].max
 
+    # -------- Decide price based on plan --------
+    plan = payload['plan'] || '30min'  # default to 30min if not provided
+    price_id = case plan
+               when '30min'
+                 'price_1RqYEhBbgLT6ovycotduTf5F' # $40/week
+               when '60min'
+                 'price_1RyvsoBbgLT6ovycfOwrQurL'                   # $80/week, replace with your actual Stripe ID
+               else
+                 halt 400, { error: 'Invalid plan selected' }.to_json
+               end
+
     customer = Stripe::Customer.create(
       name:  payload['name'],
       email: payload['email'],
@@ -69,7 +80,7 @@ post '/create-checkout-session' do
       mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [{
-        price: 'price_1RqYEhBbgLT6ovycotduTf5F',
+        price: price_id,
         quantity: 1
       }],
       subscription_data: { trial_end: trial_end_unix },
