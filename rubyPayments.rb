@@ -77,6 +77,9 @@ post '/create-checkout-session' do
                else
                  halt 400, { error: 'Invalid plan or method' }.to_json
                end
+    
+    puts "Received payload: #{payload.inspect}"
+    puts "Selected method: #{method}, plan: #{plan}, price_id: #{price_id}"
 
     # Create Stripe customer
     customer = Stripe::Customer.create(
@@ -114,8 +117,7 @@ post '/create-checkout-session' do
     status 500
     { error: e.message }.to_json
   end
-  puts "Received payload: #{payload.inspect}"
-  puts "Selected method: #{method}, plan: #{plan}, price_id: #{price_id}"
+  
 end
 
 # -------- Stripe Customer Portal --------
