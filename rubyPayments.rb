@@ -60,31 +60,24 @@ post '/create-checkout-session' do
     trial_end_date = booking_date - 1
     trial_end_unix = [trial_end_date.to_time.to_i, Time.now.to_i + 60].max
 
-    # Grab plan and method
-    plan = payload['plan'] || '30min'   # 30min or 60min
-    method = payload['method'] || 'Private' # Private or Zoom
-
-    # Decide Stripe Price ID based on plan + method
-    price_id = case [method, plan]
-               when ['Private', '30min']
+    # -------- Decide price based on plan --------
+    plan = payload['plan'] || '30min'  # default to 30min if not provided
+    price_id = case plan
+               when '30min'
                  'price_1RqYEhBbgLT6ovycotduTf5F' # $40/week
-               when ['Private', '60min']
+               when '60min'
                  'price_1RyvsoBbgLT6ovycfOwrQurL' # $80/week
-               when ['Zoom', '30min']
-                 'price_1RxZoom30minXXXXXXX' # replace with your $30/week Stripe price ID
-               when ['Zoom', '60min']
-                 'price_1RxZoom60minXXXXXXX' # replace with your $60/week Stripe price ID
                else
-                 halt 400, { error: 'Invalid plan or method' }.to_json
+                 halt 400, { error: 'Invalid plan selected' }.to_json
                end
 
-    # Create Stripe customer
     customer = Stripe::Customer.create(
       name:  payload['name'],
       email: payload['email'],
       phone: payload['number']
     )
 
+    # -------- Use your custom domain instead of request.base_url --------
     base_url = "https://warramusic.com.au"
 
     success_url = "#{base_url}/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id=#{customer.id}"
