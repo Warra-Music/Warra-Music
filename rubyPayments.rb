@@ -62,13 +62,18 @@ post '/create-checkout-session' do
 
     # -------- Decide price based on plan --------
     plan = payload['plan'] || '30min'  # default to 30min if not provided
-    price_id = case plan
-               when '30min'
+
+    price_id = case [method, plan]
+               when ['Private', '30min']
                  'price_1RqYEhBbgLT6ovycotduTf5F' # $40/week
-               when '60min'
+               when ['Private', '60min']
                  'price_1RyvsoBbgLT6ovycfOwrQurL' # $80/week
+               when ['Zoom', '30min']
+                 'price_1RxZoom30minXXXXXXX' # replace with your $30/week Stripe price ID
+               when ['Zoom', '60min']
+                 'price_1RxZoom60minXXXXXXX' # replace with your $60/week Stripe price ID
                else
-                 halt 400, { error: 'Invalid plan selected' }.to_json
+                 halt 400, { error: 'Invalid plan or method' }.to_json
                end
 
     customer = Stripe::Customer.create(
