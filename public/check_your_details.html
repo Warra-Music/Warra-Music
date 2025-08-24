@@ -64,11 +64,18 @@
         const bookingDate = localStorage.getItem('bookingDate') || 'Not provided';
         const time = localStorage.getItem('time') || 'Not selected';
         const weekday = localStorage.getItem('weekday') || 'Not selected';
-        const method = localStorage.getItem('method') || 'Not selected';
+        const method = localStorage.getItem('method') || 'Private'; // Default to Private if not set
 
         // Function to render details block dynamically
         function renderDetails(plan) {
-            let price = plan === "60min" ? 80 : 40;
+            // Decide price based on method
+            let price = 0;
+            if (method === "Private") {
+                price = plan === "60min" ? 80 : 40;
+            } else { // Zoom
+                price = plan === "60min" ? 60 : 30;
+            }
+
             let duration = plan === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
 
             document.querySelector('.details').innerHTML = `
@@ -110,13 +117,13 @@
             function handleCheckout(plan) {
                 renderDetails(plan);
 
-                fetch('https://warra-music.onrender.com/create-checkout-session', {
+                fetch('https://warramusic.com.au/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         instrument, level, name, email, number,
                         bookingDate, time, weekday, method,
-                        plan   // <-- send correct plan to backend
+                        plan
                     })
                 })
                 .then(res => res.json())
