@@ -63,24 +63,29 @@ post '/create-checkout-session' do
     email = payload['email'] || halt(400, { error: 'Missing email' }.to_json)
     number = payload['number'] || halt(400, { error: 'Missing phone number' }.to_json)
     plan = payload['plan'] || '30min'
-    method = payload['method'] || 'Private'
+    method_string = payload['method'] || 'Unknown'
 
     puts "✅ Name: #{name}, Email: #{email}, Phone: #{number}"
-    puts "✅ Plan: #{plan}, Method: #{method}"
+    puts "✅ Plan: #{plan}, Method string: #{method_string}"
 
-    # Decide Stripe price ID based on plan + method
-    price_id = case [method, plan]
-               when ['Private', '30min']
-                 'price_1RqYEhBbgLT6ovycotduTf5F'
-               when ['Private', '60min']
-                 'price_1RyvsoBbgLT6ovycfOwrQurL'
-               when ['Zoom', '30min']
-                 'price_1RzdaJBbgLT6ovycE5wFU9gM'
-               when ['Zoom', '60min']
-                 'price_1RzdcdBbgLT6ovycUdkE2XiH'
-               else
-                 halt 400, { error: "Invalid combination: method=#{method}, plan=#{plan}" }.to_json
-               end
+    # Determine lesson type based on method string
+    lesson_type = method_string.strip == 'Zoom ID: #322 428 0987' ? 'Zoom' : 'Private'
+
+    puts "🎯 Determined lesson type: #{lesson_type}"
+
+    # Decide Stripe price ID based on lesson type + plan
+    price_id = case [lesson_type, plan]
+              when ['Private', '30min']
+                'price_1RqYEhBbgLT6ovycotduTf5F'
+              when ['Private', '60min']
+                'price_1RyvsoBbgLT6ovycfOwrQurL'
+              when ['Zoom', '30min']
+                'price_1RzdaJBbgLT6ovycE5wFU9gM'
+              when ['Zoom', '60min']
+                'price_1RzdcdBbgLT6ovycUdkE2XiH'
+              else
+                halt 400, { error: "Invalid combination: lesson_type=#{lesson_type}, plan=#{plan}" }.to_json
+              end
 
     puts "💰 Selected price_id: #{price_id}"
 
