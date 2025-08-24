@@ -114,6 +114,8 @@ post '/create-checkout-session' do
     status 500
     { error: e.message }.to_json
   end
+  puts "Received payload: #{payload.inspect}"
+  puts "Selected method: #{method}, plan: #{plan}, price_id: #{price_id}"
 end
 
 # -------- Stripe Customer Portal --------
