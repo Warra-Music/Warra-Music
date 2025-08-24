@@ -47,120 +47,96 @@
     </div>
 
     <script>
-        // Load query params into localStorage
-        const urlParams = new URLSearchParams(window.location.search);
-        const dateParam = urlParams.get('date');
-        const timeParam = urlParams.get('time');
-        if (dateParam) localStorage.setItem('bookingDate', dateParam);
-        if (timeParam) localStorage.setItem('time', timeParam);
+document.addEventListener('DOMContentLoaded', function() {
+    const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
 
-        // Grab saved values
-        const instrument = localStorage.getItem('instrument') || 'Not selected';
-        const level = localStorage.getItem('level') || 'Not selected';
-        const name = localStorage.getItem('name') || 'Not provided';
-        const email = localStorage.getItem('email') || 'Not provided';
-        const number = localStorage.getItem('number') || 'Not provided';
-        const birthDate = localStorage.getItem('birthDate') || 'Not selected';
-        const bookingDate = localStorage.getItem('bookingDate') || 'Not provided';
-        const time = localStorage.getItem('time') || 'Not selected';
-        const weekday = localStorage.getItem('weekday') || 'Not selected';
-        const method = localStorage.getItem('method') || 'Private'; // Default to Private if not set
+    // Grab saved values from localStorage
+    const instrument = localStorage.getItem('instrument') || 'Not selected';
+    const level = localStorage.getItem('level') || 'Not selected';
+    const name = localStorage.getItem('name') || 'Not provided';
+    const email = localStorage.getItem('email') || 'Not provided';
+    const number = localStorage.getItem('number') || 'Not provided';
+    const bookingDate = localStorage.getItem('bookingDate') || 'Not provided';
+    const time = localStorage.getItem('time') || 'Not selected';
+    const weekday = localStorage.getItem('weekday') || 'Not selected';
 
-        // Function to render details block dynamically
-        function renderDetails(plan) {
-            // Decide price based on method
-            let price = 0;
-            if (method === "Private") {
-                price = plan === "60min" ? 80 : 40;
-            } else { // Zoom
-                price = plan === "60min" ? 60 : 30;
-            }
-
-            let duration = plan === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
-
-            document.querySelector('.details').innerHTML = `
-                <h1>Check your details!</h1>
-                <div class="detailBlocks">
-                    <h2>Your Details</h2>
-                    <p>Your Name: ${name}</p>
-                    <p>Your Phone Number: ${number}</p>
-                    <p>Your Email Address: ${email}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Booking Details</h2>
-                    <p>Instrument: ${instrument}</p>
-                    <p>Booking: ${duration}</p>
-                    <p>Weekday: ${weekday}</p>
-                    <p>Time: ${time}</p>
-                    <p>Start Date: ${bookingDate}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Where</h2>
-                    <p>${method}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Payment Information</h2>
-                    <p>A weekly fee of $${price} will be charged</p>
-                    <p>starting the day before your first lesson.</p>
-                    <p>You can cancel your subscription at any time</p>
-                </div>
-                <div class="detailBlocks">
-                    <p>By clicking pay now below, you accept and agree to the</p>
-                    <p>terms and conditions for music lessons Warra Music.</p>
-                </div>
-            `;
+    // Function to render details dynamically
+    function renderDetails(plan, method) {
+        let price = 0;
+        if (method === "Private") {
+            price = plan === "60min" ? 80 : 40;
+        } else { // Zoom
+            price = plan === "60min" ? 60 : 30;
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
+        const duration = plan === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
 
-            function handleCheckout(plan) {
-                // Clean up method before sending
-                let rawMethod = localStorage.getItem('method') || 'Private';
-                let method = rawMethod.includes('Zoom') ? 'Zoom' : 'Private';
+        document.querySelector('.details').innerHTML = `
+            <h1>Check your details!</h1>
+            <div class="detailBlocks">
+                <h2>Your Details</h2>
+                <p>Your Name: ${name}</p>
+                <p>Your Phone Number: ${number}</p>
+                <p>Your Email Address: ${email}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Booking Details</h2>
+                <p>Instrument: ${instrument}</p>
+                <p>Booking: ${duration}</p>
+                <p>Weekday: ${weekday}</p>
+                <p>Time: ${time}</p>
+                <p>Start Date: ${bookingDate}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Where</h2>
+                <p>${method}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Payment Information</h2>
+                <p>A weekly fee of $${price} will be charged</p>
+                <p>starting the day before your first lesson.</p>
+                <p>You can cancel your subscription at any time</p>
+            </div>
+        `;
+    }
 
-                renderDetails(plan);
+    // Handle checkout
+    function handleCheckout(plan, method) {
+        renderDetails(plan, method);
 
-                fetch('https://warramusic.com.au/create-checkout-session', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        instrument,
-                        level,
-                        name,
-                        email,
-                        number,
-                        bookingDate,
-                        time,
-                        weekday,
-                        method,
-                        plan
-                    })
-                })
-                .then(res => res.json())
-                .then(session => {
-                    if (!session.id) {
-                        alert("⚠️ Stripe session not created. Check your backend logs.");
-                        return;
-                    }
-                    return stripe.redirectToCheckout({ sessionId: session.id });
-                })
-                .then(result => {
-                    if (result && result.error) alert(result.error.message);
-                })
-                .catch(err => {
-                    console.error("❌ Error creating checkout session:", err);
-                    alert("Failed to start checkout. Check console for details.");
-                });
+        fetch('https://warramusic.com.au/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                instrument, level, name, email, number,
+                bookingDate, time, weekday, method,
+                plan
+            })
+        })
+        .then(res => res.json())
+        .then(session => {
+            if (!session.id) {
+                alert("⚠️ Stripe session not created. Check your backend logs.");
+                return;
             }
-
-            // Button listeners
-            document.getElementById('checkout-30').addEventListener('click', () => handleCheckout("30min"));
-            document.getElementById('checkout-60').addEventListener('click', () => handleCheckout("60min"));
-
-            // Show default (30min) details when page loads
-            renderDetails("30min");
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(result => {
+            if (result && result.error) alert(result.error.message);
+        })
+        .catch(err => {
+            console.error("❌ Error creating checkout session:", err);
+            alert("Failed to start checkout. Check console for details.");
         });
-    </script>
+    }
+
+    // Button listeners — pass method explicitly
+    document.getElementById('checkout-30').addEventListener('click', () => handleCheckout("30min", "Private"));
+    document.getElementById('checkout-60').addEventListener('click', () => handleCheckout("60min", "Zoom"));
+
+    // Show default details on page load
+    renderDetails("30min", "Private");
+});
+</script>
 </body>
 </html>
