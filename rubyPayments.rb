@@ -27,7 +27,7 @@ end
 
 # -------- Static HTML routes --------
 get '/' do
-  send_file File.join(settings.public_folder, 'check_your_details.html')
+  send_file File.join(settings.public_folder, 'index.html')
 end
 
 get '/currentLevel.html' do
@@ -44,6 +44,10 @@ end
 
 get '/account' do
   send_file File.join(settings.public_folder, 'account.html')
+end
+
+get '/check_your_details' do
+  send_file File.join(settings.public_folder, 'check_your_details.html')
 end
 
 # -------- Stripe Checkout --------
@@ -73,7 +77,10 @@ post '/create-checkout-session' do
       phone: payload['number']
     )
 
-    success_url = "#{request.base_url}/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id=#{customer.id}"
+    # -------- Use your custom domain instead of request.base_url --------
+    base_url = "https://warramusic.com.au"
+
+    success_url = "#{base_url}/success.html?session_id={CHECKOUT_SESSION_ID}&customer_id=#{customer.id}"
 
     session = Stripe::Checkout::Session.create(
       customer: customer.id,
@@ -85,7 +92,7 @@ post '/create-checkout-session' do
       }],
       subscription_data: { trial_end: trial_end_unix },
       success_url: success_url,
-      cancel_url: "#{request.base_url}/canceled.html"
+      cancel_url: "#{base_url}/canceled.html"
     )
 
     status 200
@@ -113,9 +120,11 @@ post '/customer-portal' do
 
     Stripe::Customer.retrieve(customer_id)
 
+    base_url = "https://warramusic.com.au"
+
     portal = Stripe::BillingPortal::Session.create(
       customer: customer_id,
-      return_url: "#{request.base_url}/account"
+      return_url: "#{base_url}/account"
     )
 
     { url: portal.url }.to_json
