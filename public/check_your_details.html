@@ -100,6 +100,14 @@
     document.addEventListener('DOMContentLoaded', function() {
         const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
 
+        // Determine prices based on method
+        const price30 = method.includes('Zoom') ? 30 : 40;
+        const price60 = method.includes('Zoom') ? 60 : 80;
+
+        // Update button text to include prices
+        document.getElementById('checkout-30').querySelector('p').textContent = `30 min lessons - $${price30}`;
+        document.getElementById('checkout-60').querySelector('p').textContent = `60 min lessons - $${price60}`;
+
         function handleCheckout(plan) {
             renderDetails(plan);
 
@@ -109,7 +117,7 @@
                 body: JSON.stringify({
                     instrument, level, name, email, number,
                     bookingDate, time, weekday, method,
-                    plan // send dynamic plan
+                    plan
                 })
             })
             .then(res => res.json())
