@@ -115,14 +115,25 @@
             const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
 
             function handleCheckout(plan) {
+                // Clean up method before sending
+                let rawMethod = localStorage.getItem('method') || 'Private';
+                let method = rawMethod.includes('Zoom') ? 'Zoom' : 'Private';
+
                 renderDetails(plan);
 
                 fetch('https://warramusic.com.au/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        instrument, level, name, email, number,
-                        bookingDate, time, weekday, method,
+                        instrument,
+                        level,
+                        name,
+                        email,
+                        number,
+                        bookingDate,
+                        time,
+                        weekday,
+                        method,
                         plan
                     })
                 })
