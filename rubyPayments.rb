@@ -62,6 +62,7 @@ post '/create-checkout-session' do
 
     # -------- Decide price based on plan --------
     plan = payload['plan'] || '30min'  # default to 30min if not provided
+    method = payload['method'] || 'Private'
 
     price_id = case [method, plan]
                when ['Private', '30min']
