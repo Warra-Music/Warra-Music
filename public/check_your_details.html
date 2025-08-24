@@ -37,10 +37,10 @@
         </div>
 
         <div class="nav-buttons">
-            <button id="checkout-30" class="next">
+            <button id="checkout-button" class="next">
                 <p>30 min lessons !</p>
             </button>
-            <button id="checkout-60" class="back">
+            <button id="checkout-button1" class="back">
                 <p>60 min lessons !</p>
             </button>
         </div>
@@ -66,59 +66,50 @@
         const weekday = localStorage.getItem('weekday') || 'Not selected';
         const method = localStorage.getItem('method') || 'Not selected';
 
-        // Function to render details block dynamically
-        function renderDetails(lessonType) {
-            let price = lessonType === "60min" ? 70 : 40;
-            let duration = lessonType === "60min" ? "60 Minutes Music Lessons" : "30 Minutes Music Lessons";
-
-            document.querySelector('.details').innerHTML = `
-                <h1>Check your details!</h1>
-                <div class="detailBlocks">
-                    <h2>Your Details</h2>
-                    <p>Your Name: ${name}</p>
-                    <p>Your Phone Number: ${number}</p>
-                    <p>Your Email Address: ${email}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Booking Details</h2>
-                    <p>Instrument: ${instrument}</p>
-                    <p>Booking: ${duration}</p>
-                    <p>Weekday: ${weekday}</p>
-                    <p>Time: ${time}</p>
-                    <p>Start Date: ${bookingDate}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Where</h2>
-                    <p>${method}</p>
-                </div>
-                <div class="detailBlocks">
-                    <h2>Payment Information</h2>
-                    <p>A weekly fee of $${price} will be charged</p>
-                    <p>starting the day before your first lesson.</p>
-                    <p>You can cancel your subscription at any time</p>
-                </div>
-                <div class="detailBlocks">
-                    <p>By clicking pay now below, you accept and agree to the</p>
-                    <p>terms and conditions for music lessons Warra Music.</p>
-                </div>
-            `;
-        }
+        // Show details on page
+        document.querySelector('.details').innerHTML += `
+            <div class="detailBlocks">
+                <h2>Your Details</h2>
+                <p>Your Name: ${name}</p>
+                <p>Your Phone Number: ${number}</p>
+                <p>Your Email Address: ${email}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Booking Details</h2>
+                <p>Instrument: ${instrument}</p>
+                <p>Booking: 30 Minutes Music Lessons</p>
+                <p>Weekday: ${weekday}</p>
+                <p>Time: ${time}</p>
+                <p>Start Date: ${bookingDate}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Where</h2>
+                <p>${method}</p>
+            </div>
+            <div class="detailBlocks">
+                <h2>Payment Information</h2>
+                <p>A weekly fee of $40 will be charged</p>
+                <p>starting the day before your first lesson.</p>
+                <p>You can cancel your subscription at any time</p>
+            </div>
+            <div class="detailBlocks">
+                <p>By clicking pay now below, you accept and agree to the</p>
+                <p>terms and conditions for music lessons Warra Music.</p>
+            </div>
+        `;
 
         document.addEventListener('DOMContentLoaded', function() {
             const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
-
-            function handleCheckout(lessonType) {
-                // Re-render details before checkout
-                renderDetails(lessonType);
-
+            const checkoutButton = document.getElementById('checkout-button');
+            
+            checkoutButton.addEventListener('click', function() {
                 // Send booking details to backend
                 fetch('https://warra-music.onrender.com/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         instrument, level, name, email, number,
-                        bookingDate, time, weekday, method,
-                        lessonType
+                        bookingDate, time, weekday, method
                     })
                 })
                 .then(res => res.json())
@@ -136,14 +127,7 @@
                     console.error("❌ Error creating checkout session:", err);
                     alert("Failed to start checkout. Check console for details.");
                 });
-            }
-
-            // Button listeners
-            document.getElementById('checkout-30').addEventListener('click', () => handleCheckout("30min"));
-            document.getElementById('checkout-60').addEventListener('click', () => handleCheckout("60min"));
-
-            // Show default (30min) details when page loads
-            renderDetails("30min");
+            });
         });
     </script>
 </body>
