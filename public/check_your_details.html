@@ -87,9 +87,10 @@
             </div>
             <div class="detailBlocks">
                 <h2>Payment Information</h2>
-                <p>A weekly fee of $${price} will be charged</p>
+                <p>A weekly fee will be charged</p>
                 <p>starting the day before your first lesson.</p>
-                <p>You can cancel your subscription at any time</p>
+                <p>You can cancel your subscription at any time via an email</p>
+                <p>that will be sent to you automatically</p>
             </div>
             <div class="detailBlocks">
                 <p>By clicking pay now below, you accept and agree to the</p>
@@ -99,7 +100,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const stripe = Stripe('pk_test_51RhNOHBbgLT6ovycOTKajCBx4mf2J19nekj1nqFdLIGPtveJnr044z2oYbGuevdjqXZ0dOAyWUEXfjkFaePzH3ne00dwF71M7j');
+        const stripe = Stripe('pk_live_51RhNOHBbgLT6ovycnwm1boUlyVQj4nOoXHhjSd3QOvk3OxuYbt5R5Fkg61Vy09CSVhnUeu4KiXsfZqT1zHe7ONxK00VaKyh7R1');
 
         // Determine prices based on method
         const price30 = method.includes('Zoom') ? 30 : 40;
@@ -124,7 +125,7 @@
             .then(res => res.json())
             .then(session => {
                 if (!session.id) {
-                    alert("⚠️ Stripe session not created. Check your backend logs.");
+                    alert("⚠️ Stripe session not created. Make sure you choose a date that is atleast one day in the future, and make sure your email is right");
                     return;
                 }
                 return stripe.redirectToCheckout({ sessionId: session.id });
