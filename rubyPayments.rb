@@ -76,13 +76,13 @@ post '/create-checkout-session' do
     # Decide Stripe price ID based on lesson type + plan
     price_id = case [lesson_type, plan]
               when ['Private', '30min']
-                'price_1RqYEhBbgLT6ovycotduTf5F'
+                'price_1S0H5ABbgLT6ovychsMStuGR'
               when ['Private', '60min']
-                'price_1RyvsoBbgLT6ovycfOwrQurL'
+                'price_1S0H5yBbgLT6ovyc15JWGQbt'
               when ['Zoom', '30min']
-                'price_1RzdaJBbgLT6ovycE5wFU9gM'
+                'price_1S0H7CBbgLT6ovyckzMX7q7d'
               when ['Zoom', '60min']
-                'price_1RzdcdBbgLT6ovycUdkE2XiH'
+                'price_1S0H87BbgLT6ovyciPBme8JL'
               else
                 halt 400, { error: "Invalid combination: lesson_type=#{lesson_type}, plan=#{plan}" }.to_json
               end
