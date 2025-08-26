@@ -113,6 +113,11 @@
         function handleCheckout(plan) {
             renderDetails(plan);
 
+            console.log({
+            instrument, level, name, email, number,
+            bookingDate, time, weekday, method, plan
+            });
+
             fetch('https://warra-music.onrender.com/create-checkout-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
