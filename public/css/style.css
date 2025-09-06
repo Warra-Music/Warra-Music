@@ -390,15 +390,39 @@ nav a:hover, nav a:focus {
     left: 100%;
     transform: translateX(-100%);
     box-sizing: border-box;
-    z-index: 1;
+    z-index: 2;
     font-family: "qwertyuiop";
-    color: transparent;
+    color: white;
     background-color:#17252a;
     line-height: 1.48;
-    outline-color: black;
-    outline-width: 0.3rem;
-    outline-style: solid;
 }
+
+.timebox {
+    margin-left: 60%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    left: 100%;
+}
+
+.timebox1, .timebox2 {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(3rem, 5vw, 7rem);
+}
+
+.timebox2 {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1.75rem, 3vw, 4.2rem);
+}
+
+.time {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .link_buffer {
     position: relative;
@@ -417,11 +441,14 @@ nav a:hover, nav a:focus {
     left: 100%;
     transform: translateX(-100%);
     box-sizing: border-box;
-    z-index: 0;
+    z-index: 1;
     font-family: "qwertyuiop";
     color: transparent;
     background-color:#17252a;
     line-height: 1.48;
+    outline-color: black;
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 .container_three {
