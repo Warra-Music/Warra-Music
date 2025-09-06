@@ -400,7 +400,7 @@ nav a:hover, nav a:focus {
 
 .timebox {
     margin-left: 60%;
-    margin-top: 3vw;
+
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
