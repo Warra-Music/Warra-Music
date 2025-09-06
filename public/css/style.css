@@ -411,13 +411,13 @@ nav a:hover, nav a:focus {
 .timebox1, .timebox2 {
     display: flex;
     flex-direction: row;
-    gap: clamp(3rem, 5vw, 7rem);
+    gap: clamp(2rem, 5vw, 7rem);
 }
 
 .timebox2 {
     display: flex;
     flex-direction: row;
-    gap: clamp(1.75rem, 3vw, 4.2rem);
+    gap: clamp(1rem, 3vw, 4.2rem);
 }
 
 .time {
