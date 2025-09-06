@@ -126,9 +126,28 @@
             </div>
             <div class = "false_description">
                 <p>
-                    <h2>Limited time Free Guitar after 5 Lessons !!</h2><br>
-                    <span style="font-size: 0.9em;">
-                        Sign up now and receive an electric guitar on your 5th lesson – our gift in supporting your journey!
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Countdown</h2><br>
+                    <span class = 'timebox' style="font-size: 0.9em;">
+                        <div class="timebox1">
+                            <div class = 'time'>
+                                <h2 id = 'days'>00</h2>
+                                <p>Days</p>
+                            </div>
+                            <div class = 'time'>
+                                <h2 id = 'hours'>00</h2>
+                                <p>Hours</p>
+                            </div>
+                        </div>
+                        <div class = 'timebox2'>
+                            <div class = 'time'>
+                                <h2 id = 'minutes'>00</h2>
+                                <p>Minutes</p>
+                            </div>
+                            <div class = 'time'>
+                                <h2 id = 'seconds'>00</h2>
+                                <p>Seconds</p>
+                            </div>
+                        </div>
                     </span>
                 </p>
             </div>
@@ -151,9 +170,9 @@
             </div>
             <div class = "false_description2">
                 <p>
-                    <h2>Limited time Free Guitar after 5 Lessons !!</h2><br>
+                    <h2>Limited time Free Guitar after 6 Lessons !!</h2><br>
                     <span style="font-size: 0.9em;">
-                        Sign up now and receive an electric guitar on your 5th lesson – our gift in supporting your journey!
+                        Sign up now and receive an electric guitar on your 6th lesson – our gift in supporting your journey!
                     </span>
                 </p>
             </div>
@@ -180,9 +199,9 @@
             </div>
             <div class = "false_description2">
                 <p>
-                    <h2>Limited time Free Guitar after 5 Lessons !!</h2><br>
+                    <h2>Limited time Free Guitar after 6 Lessons !!</h2><br>
                     <span style="font-size: 0.9em;">
-                        Sign up now and receive an electric guitar on your 5th lesson – our gift in supporting your journey!
+                        Sign up now and receive an electric guitar on your 6th lesson – our gift in supporting your journey!
                     </span>
                 </p>
             </div>
@@ -217,6 +236,40 @@
         // Navigate to next page
         window.location.href = 'check_your_details.html';
     }
+    const Days = document.getElementById('days');
+    const Hours = document.getElementById('hours');
+    const Minutes = document.getElementById('minutes');
+    const Seconds = document.getElementById('seconds');
+
+    const targetDate = new Date('October 1 2025 00:00:00').getTime();
+
+    function timer () {
+        const currentDate = new Date().getTime();
+        const distance = targetDate - currentDate;
+
+        if (distance < 0) {
+        Days.innerHTML = Hours.innerHTML = Minutes.innerHTML = Seconds.innerHTML = "00";
+        return;
+    }
+
+        const days = Math.floor(distance / 1000 / 60 / 60 / 24);
+        const hours = Math.floor(distance / 1000 / 60 / 60) % 24;
+        const minutes = Math.floor(distance / 1000 / 60) % 60;
+        const seconds = Math.floor(distance / 1000) % 60;
+
+        Days.innerHTML = days;
+        Hours.innerHTML = hours;
+        Minutes.innerHTML = minutes;
+        Seconds.innerHTML = seconds;
+
+        
+
+    }
+
+    timer();
+    setInterval(timer, 1000);
+
+
     </script>
 
     
