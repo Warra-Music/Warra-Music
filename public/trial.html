@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jason Brogniez">
+  <title>Warra Music - Trial Booking</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="png" href="finalLogo_pic.png">
+</head>
+<body>
+  <div class="page">
+    <div class="containerBackground">
+      <div class="titleBar">
+        <p>
+          <img src="finalLogo_pic.png" alt="Logo" title="Warra Music" height="105" width="95" loading="eager">
+        </p>
+      </div>
+    </div>
+
+    <div class="instrument">
+      <h1>Set up trial lesson</h1>
+
+      <form id="trialForm" class="inputs">
+        <div>
+          <input type="text" name="email" id="email" placeholder="Email" autocomplete="on" required>
+        </div>
+        <div>
+          <input type="tel" name="phone" id="phone" placeholder="Phone number" autocomplete="on" required>
+        </div>
+        <div>
+          <input type="text" name="address" id="address" placeholder="Address" autocomplete="on" required>
+        </div>
+
+        <label class="instrument-label" for="instruments">Instrument:</label>
+        <div class="select-wrapper">
+          <select id="instruments" name="instruments" required>
+            <option value="Guitar">Guitar</option>
+            <option value="Drums">Drums</option>
+            <option value="Piano">Piano</option>
+            <option value="Bass">Bass</option>
+            <option value="Ukulele">Ukulele</option>
+          </select>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" name="method" value="Zoom ID: #322 428 0987" class="back">Online</button>
+          <button type="button" name="method" value="1on1 at your place" class="next">Private</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('button[name="method"]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const instrument = document.getElementById('instruments').value;
+
+        if (!email || !phone || !address || !instrument) {
+          alert('Please fill out all fields before continuing.');
+          return;
+        }
+
+        const bookingData = { email, phone, address, instrument, method: btn.value };
+
+        try {
+          // 1️⃣ Send request to backend
+          const response = await fetch('http://localhost:4567/book-trial', {
+            method: 'POST',
+            body: JSON.stringify(bookingData),
+            headers: { 'Content-Type': 'application/json' }
+          });
+
+          // 2️⃣ Parse response text as JSON (force parsing regardless of content-type)
+          const text = await response.text();
+          console.log('RAW response from backend:', text); // 👈 log raw response
+
+          let result;
+          try {
+            result = JSON.parse(text);
+            console.log('Parsed GAS response:', result);
+            console.log('result.status (exact):', '"' + result.status + '"');
+          } catch (err) {
+            console.error('Failed to parse JSON from backend:', text);
+            alert('Error: Invalid JSON from Google Apps Script');
+            return;
+          }
+
+          // 3️⃣ Check if email already exists (case + whitespace safe)
+          if (result.status && result.status.toLowerCase().trim() === 'exists') {
+            alert('This email has already booked a trial lesson.');
+            return; // stop redirect
+          }
+
+          // 4️⃣ Success: store info and redirect
+          localStorage.setItem('trial', 'true');
+          localStorage.setItem('method', btn.value);
+          localStorage.setItem('email', email);
+          localStorage.setItem('phone', phone);
+          localStorage.setItem('address', address);
+          localStorage.setItem('instrument', instrument);
+
+          window.location.href = "booking_calender.html";
+
+        } catch (err) {
+          console.error('Booking error:', err);
+          alert('There was a problem processing your booking. Please try again.');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
