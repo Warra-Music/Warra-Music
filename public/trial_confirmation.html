@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Me" content="Jason Brogniez">
+  <title>Warra Music</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="png" href="finalLogo_pic.png">
+</head>
+
+<body>
+    <div class="page">
+        <div class="containerBackground">
+            <div class="titleBar">
+                <p>
+                    <img src="finalLogo_pic.png" alt="Logo" title="Warra Music" height="105" width="95" loading="eager">
+                </p>
+            </div>
+            <div class="menu-wrapper">
+                <button class="menu-button"><div class="menu-icon"></div></button>
+                <nav>
+                    <ul>
+                        <li><a href="index.html#titleBar">Private Lessons</a></li>
+                        <li><a href="index.html#Online">Online Lessons</a></li>
+                        <li><a href="index.html#Contacts">Contacts</a></li>
+                        <li><a href="index.html#description">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="details">
+            <br>
+            <h1>Trial lesson confirmed!!</h1>
+            <br>
+
+            <div class="detailBlocks">
+                <h1><br>
+                    Your registration was successful! <br>
+                    An email was sent to you with details about your trial lesson
+                    <br><br>:)<br><br>
+                    For more information about your trial lesson,<br>contact us at 0468 331 266, admin@warramusic.com.au
+                    <br><br>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      // Store this email in the bookedEmails array so it can't book again
+      const email = localStorage.getItem('email');
+      if (email) {
+        let bookedEmails = JSON.parse(localStorage.getItem('bookedEmails') || '[]');
+
+        // Only add if it isn't already in the array
+        if (!bookedEmails.includes(email)) {
+          bookedEmails.push(email);
+          localStorage.setItem('bookedEmails', JSON.stringify(bookedEmails));
+        }
+      }
+    </script>
+</body>
+</html>
