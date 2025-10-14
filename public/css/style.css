@@ -762,7 +762,17 @@ a:hover {
     font-family: 'qwertyuiop', sans-serif; 
 }
 
-
+.medium {
+    position: relative;
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    
+    font-family: 'qwertyuiop', sans-serif; 
+}
 
 .instruments1 {
 
@@ -1212,8 +1222,26 @@ input[type=tel]:focus-within {
     height: clamp(2.4rem,4.1vw,6rem);
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 3.5vw;
+
+
 }
 
+.instrument-label {
+  display: inline-block;   /* don’t stretch full width */
+  margin-right: 0.5rem;    /* space before dropdown */
+  font-weight: 600;        /* optional: make it bolder */
+  cursor: pointer;         /* make it feel clickable */
+  margin-bottom: 100px;
+}
+
+select {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
 
 input[type=date] {
     background-color: transparent;
@@ -1482,3 +1510,56 @@ input[type="date"]:valid {
 .one {
     left: -216;
 }
+
+#TrialLesson {
+    color: white;           
+    padding-left: 20px;  
+    padding-right: 20px;  
+    padding-top: 5px;  
+    padding-bottom: 0;  
+    background-color:#3f6774;
+    top: clamp(2.25rem, 3.75vw, 5.25rem);        
+    z-index: 20;
+    border-radius: 5vw;
+    font-size: 2vw;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    left: 75%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-color: white;
+    border-width: 0.4vw;
+    font-family: 'qwertyuiop';
+}
+
+#TrialLesson:hover {
+    border-color:chartreuse;
+}
+
+.instrument-label {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    cursor: pointer; /* makes it clear you can click it */
+    position: relative;
+    color: rgb(170, 170, 170);
+    z-index: 20;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: min-content;
+    
+}
+
+.select-wrapper select{
+    background-color:rgb(99, 99, 99);
+    color:white;
+}
+
+
