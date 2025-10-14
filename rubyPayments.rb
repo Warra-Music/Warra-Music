@@ -4,6 +4,7 @@ require 'date'
 require 'stripe'
 require 'sinatra/cross_origin'
 require 'uri'
+require 'net/http'
 
 # Stripe API key (set in Render dashboard)
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
@@ -162,14 +163,50 @@ post '/customer-portal' do
 end
 
 # -------- Session info --------
-get '/get-session-info' do
+
+post '/book-trial' do
   content_type :json
+
   begin
-    session = Stripe::Checkout::Session.retrieve(params['session_id'])
-    { customer_id: session.customer }.to_json
-  rescue
-    status 404
-    { error: 'Session not found' }.to_json
+    data = JSON.parse(request.body.read)
+    uri = URI('https://script.google.com/macros/s/AKfycbwrzk2aTpun5lZRwhN6wAnKBcAzY7vFBOfVE5IgZyDdr7G8Mow5c0NNIUwEZS-MVDhQ/exec')
+
+    # POST JSON and follow redirects
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Post.new(uri)
+    req['Content-Type'] = 'application/json'
+    req.body = data.to_json
+    res = http.request(req)
+
+    while res.is_a?(Net::HTTPRedirection)
+      uri = URI(res['location'])
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      req = Net::HTTP::Post.new(uri)
+      req['Content-Type'] = 'application/json'
+      req.body = data.to_json
+      res = http.request(req)
+    end
+
+    # Attempt JSON parse
+    begin
+      result = JSON.parse(res.body)
+    rescue JSON::ParserError
+      # If parsing fails, but HTTP code is 200, treat as success
+      if res.code.to_i == 200
+        result = { 'status' => 'success' }
+      else
+        result = { 'status' => 'error', 'message' => "GAS returned non-JSON response, HTTP #{res.code}" }
+      end
+    end
+
+    status 200
+    result.to_json
+
+  rescue => e
+    status 500
+    { status: 'error', message: e.message }.to_json
   end
 end
 
