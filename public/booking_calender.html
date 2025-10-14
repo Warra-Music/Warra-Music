@@ -7,97 +7,129 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="png" href="finalLogo_pic.png">
 </head>
-  <body>
-    <div class = "page">
-      <div class = "containerBackground">
-        <div class = titleBar>
-          <p>
-            <img src = "finalLogo_pic.png" alt = "Logo" title = "Warra Music" height = "105" width = "95" loading = "eager" >
-          </p>
+<body>
+  <div class="page">
+    <div class="containerBackground">
+      <div class="titleBar">
+        <p>
+          <img src="finalLogo_pic.png" alt="Logo" title="Warra Music" height="105" width="95" loading="eager">
+        </p>
+      </div>
+    </div>
+
+    <div class="instrument">
+      <h1>Choose a time</h1>
+      <div class="booking-container">
+        <div class="booking-date-wrapper">
+          <p>Available dates</p>
+          <input type="date" id="datePicker" class="booking-date" />
         </div>
+        <div class="booking-timeslots" id="timeslots"></div>
+        <div class="booking-confirmation" id="confirmationMsg"></div>
       </div>
-      
-      <div class = "instrument">
-        <h1>
-          Choose a time
-        </h1>
-        <div class="booking-container">
-          <div class= "booking-date-wrapper">
-            <p>Available dates</p>
-            <input type="date" id="datePicker" class="booking-date" />
-          </div>
-          <div class="booking-timeslots" id="timeslots"></div>
-          <div class="booking-confirmation" id="confirmationMsg"></div>
-        </div>
-      </div>
+    </div>
 
-      <div class="nav-buttons">
-        <a href="form.html" style="text-decoration: none; color: inherit;">
-          <div class="back">
-            <p>Back</p>
-          </div>
-        </a>
-      </div>
-      
+    <div class="nav-buttons">
+      <a id="backLink" href="index.html" style="text-decoration: none; color: inherit;">
+        <div class="back"><p>Back</p></div>
+      </a>
+    </div>
 
-      <script>
-        const timeSlotsByDay = {
-          "Monday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Tuesday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Wednesday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Thursday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Friday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Saturday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-          "Sunday": ["7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM","9:00 AM", "9:30 AM","10:00 AM", "10:30 AM","11:00 AM", "11:30 AM","12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM","3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM","6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM","9:00 PM", "9:30 PM","10:00 PM"],
-        };
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-        function getDayOfWeek(dateStr) {
-          const date = new Date(dateStr);
-          return date.toLocaleDateString("en-AU", { weekday: "long" });
+    <script>
+      // Initialize EmailJS
+      (function() { emailjs.init("IE7UJA2ijP0OQ6vFY"); })(); // replace with your public key
+
+      const timeSlotsByDay = {
+        "Monday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM"],
+        "Tuesday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM","5:30 PM","6:00 PM","6:30 PM","7:00 PM","7:30 PM","8:00 PM","8:30 PM","9:00 PM","9:30 PM","10:00 PM"],
+        "Wednesday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM"],
+        "Thursday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM"],
+        "Friday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM"],
+        "Saturday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM","5:00 PM","5:30 PM","6:00 PM","6:30 PM","7:00 PM","7:30 PM","8:00 PM","8:30 PM","9:00 PM","9:30 PM","10:00 PM"],
+        "Sunday": ["7:00 AM","7:30 AM","8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM","1:00 PM","1:30 PM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM","4:30 PM"]
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("datePicker").setAttribute("min", today);
+      });
+
+      document.getElementById("datePicker").addEventListener("change", function () {
+        const selectedDate = this.value;
+        const weekday = new Date(selectedDate).toLocaleDateString("en-AU", { weekday: "long" });
+        const timeslotsDiv = document.getElementById("timeslots");
+        const confirmationMsg = document.getElementById("confirmationMsg");
+        timeslotsDiv.innerHTML = "";
+        confirmationMsg.textContent = "";
+
+        if (!selectedDate) return;
+
+        const availableSlots = timeSlotsByDay[weekday] || [];
+        if (availableSlots.length === 0) {
+          timeslotsDiv.innerHTML = "<p>No bookings available on " + weekday + ".</p>";
+          return;
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-          const today = new Date().toISOString().split("T")[0];
-          document.getElementById("datePicker").setAttribute("min", today);
-        });
+        availableSlots.forEach(time => {
+          const slotLink = document.createElement("a");
+          slotLink.className = "booking-slot";
+          slotLink.textContent = time;
+          slotLink.href = "#";
 
-        document.getElementById("datePicker").addEventListener("change", function () {
-          const selectedDate = this.value;
-          const weekday = getDayOfWeek(selectedDate); // already using getDayOfWeek
-          const day = getDayOfWeek(selectedDate);
-          const timeslotsDiv = document.getElementById("timeslots");
-          const confirmationMsg = document.getElementById("confirmationMsg");
-          confirmationMsg.textContent = "";
-          
-          localStorage.setItem('weekday', weekday);
-          
-          timeslotsDiv.innerHTML = "";
+          slotLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (slotLink.classList.contains("booked")) return;
+            slotLink.classList.add("booked");
 
-          if (!selectedDate) return;
+            const selectedTime = time;
+            const email = localStorage.getItem("email") || "";
+            const phone = localStorage.getItem("phone") || "";
+            const instrument = localStorage.getItem("instrument") || "Not selected";
+            const method = localStorage.getItem("method") || "Unknown";
 
-          const availableSlots = timeSlotsByDay[day];
+            if (!email) {
+              alert("Please provide a valid email in the trial form.");
+              return;
+            }
 
-          if (availableSlots.length === 0) {
-            timeslotsDiv.innerHTML = "<p>No bookings available on " + day + ".</p>";
-            return;
-          }
+            // Prepare booking data
+            const bookingData = {
+              email: email,
+              phone: phone,
+              instrument: instrument,
+              method: method,
+              date: selectedDate,
+              time: selectedTime
+            };
 
-          availableSlots.forEach(time => {
-            const slotLink = document.createElement("a");
-            slotLink.className = "booking-slot";
-            slotLink.textContent = time;
-            slotLink.href = `check_your_details.html?date=${selectedDate}&time=${encodeURIComponent(time)}`;
-            slotLink.addEventListener("click", (e) => {
-              if (slotLink.classList.contains("booked")) {
-                e.preventDefault(); // block navigation if already booked
-                return;
-              }
-              slotLink.classList.add("booked");
-            });
-            timeslotsDiv.appendChild(slotLink);
+            const templateParams = {...bookingData};
+            emailjs.send("service_dqcfex2", "template_45xhzre", templateParams)
+              .then((response) => {
+                console.log("✅ EmailJS success1:", response);
+              })
+              .catch((error) => {
+                console.error("❌ EmailJS failed:", error);
+                alert("Booking request failed. Try again later.");
+              });
+
+            emailjs.send("service_dqcfex2", "template_1lyahu9", templateParams)
+              .then((response) => {
+                console.log("✅ EmailJS success2:", response);
+                window.location.href = "trial_confirmation.html";
+              })
+              .catch((error) => {
+                console.error("❌ EmailJS failed:", error);
+                alert("Booking request failed. Try again later.");
+              });
           });
+
+          timeslotsDiv.appendChild(slotLink);
         });
-      </script>
-    </div>
-  </body>
+      });
+    </script>
+  </div>
+</body>
 </html>
